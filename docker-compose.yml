@@ -1,0 +1,28 @@
+version: '2'
+services:
+
+  www:
+    restart: always
+    build: www/.
+    ports:
+      - "80:80"
+        #  volumes:
+            #     - ./www:/opt/www
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    build: db/.
+    #    volumes:
+    # - /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecure
+    volumes:
+      - database:/var/lib/mysql
+
+
+volumes:
+  database:            
+
