@@ -1,6 +1,6 @@
 from index import app
 from models import User
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, SignupForm
 from flask import render_template
 from flask_bootstrap import Bootstrap
 
@@ -15,13 +15,13 @@ def home():
 def login():
     form = LoginForm()
 
-    if form.validate_on_submit():
-        return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
+    #if form.validate_on_submit():
+    #    return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
     return render_template('login.html', form=form)
 
 @app.route('/signup')
 def signup():
-    form = RegisterForm()
+    form = SignupForm()
 
     if form.validate_on_submit():
         return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'

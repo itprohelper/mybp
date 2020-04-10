@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
-from db_setup import Base, User
+#from db_setup import Base, User
 
 app = Flask(__name__)
 
