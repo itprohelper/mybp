@@ -12,7 +12,6 @@ class User(db.Model):
 
 class LoginForm(FlaskForm):
     username = StringField('username')
-    email = StringField('email')
     password = PasswordField('password')
     remember = BooleanField('remember me')
 

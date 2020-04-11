@@ -12,7 +12,7 @@ My Blood Pressure | Sign Up
 
 {% block content %}
 <div class="container">
-		<form class="form-signin" method="POST" action="/login">
+		<form class="form-signin" method="POST" action="/signup">
 			<h2 class="form-signin-heading">Sign Up</h2>
 			{{ form.hidden_tag() }}
 			{{ wtf.form_field(form.username) }}
