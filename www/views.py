@@ -1,11 +1,14 @@
-from index import app
-from index import db
+from index import app, login_required
+from index import db, login_manager
 from models import User
 from forms import LoginForm, SignupForm
-from flask import render_template
+from flask import render_template, redirect, url_for
+
 from flask_bootstrap import Bootstrap
 
 Bootstrap(app)
+
+
 
 @app.route('/')
 def home():
@@ -16,7 +19,13 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            if user.password == form.password.data:
+                return redirect(url_for('dashboard'))
+        return '<h1>Invalid username or password</h1>'
+
+        #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
     #if form.validate_on_submit():
     #    return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
@@ -37,8 +46,15 @@ def signup():
     return render_template('signup.html', form=form)
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', name=current_user.username)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 @app.route('/about')
 def about():

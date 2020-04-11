@@ -3,3 +3,4 @@ flask-sqlalchemy
 mysqlclient
 flask-wtf
 flask-bootstrap
+flask-login
