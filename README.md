@@ -1,22 +1,20 @@
-# Flask App with MySQL Database
+# Flask App with MySQL Database | This is work in progress
 
-## Quick Start
+## Quick Notes
 
-  1. Run `docker-compose up`
-  2. Visit `http://localhost/` in your browser.
+  1. I'm testing docker-machine for this project. You can use your preferred method.
+  2. docker-machine has crashed a couple of times having me to rebuild MySQL db. _no clue why_
 
 ## Description
 
 [Flask](http://flask.pocoo.org/) is a web development microframework for Python. It's efficient, easy-to-use, and easy-to-deploy!
 
-I often use Flask when building small webservices or dynamic websites and feel like trying something fresh and different from PHP, my daily driver. Most webservices and sites require some sort of database to store data, so we need to create not one but _two_ Docker containers, and link them together:
+Most webservices and sites require some sort of database to store data, so we need to create not one but _two_ Docker containers, and link them together:
 
   1. Flask container (with Python).
   2. MySQL container
 
-In early examples, we would build or import just one container and work with it to run some code. In real-world usage, you'll often need two, three, or even _dozens_ of containers to support the project you're working on!
-
-It would get quite unweildy to have to manage all of these containers with separate `run` and `stop` commands, so Docker has an answer: `docker-compose`.
+I'm using Docker's `docker-compose` for this project.
 
 ## Docker Compose
 
@@ -25,7 +23,7 @@ Notes:
   - [`docker-compose`](https://docs.docker.com/compose/reference/)
   - [`up`](https://docs.docker.com/compose/reference/up/)
 
-## Persisting Data
+## Persisting Data | Currently having issues with MySQL
 
 One thing repeated early and often in the world of Docker is _data stored inside a container is not persisted_. So... this creates quite the conundrum: what if you need data to persist after a container exits?
 
@@ -60,5 +58,5 @@ If you change the volume settings, then you will need to `stop` any running cont
 Read more: [Manage data in containers](https://docs.docker.com/engine/tutorials/dockervolumes/)
 
 > Note for Mac/Windows users: If you encounter performance issues with your app running inside Docker containers, and your app has many (e.g. 1,000+) files, it could be related to some filesystem performance issues with current versions of Docker. See [File access in mounted volumes extremely slow](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/107).
-> 
+>
 > This is a hard problem to solve, though the situation should improve as time goes on. For now, find ways to use volumes that aren't shared to your host whenever possible. You can also look into using tools like [docker-sync](https://docker-sync.io/) if you _must_ sync large numbers of files.
