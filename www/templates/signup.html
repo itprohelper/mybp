@@ -19,7 +19,8 @@ My Blood Pressure | Sign Up
 			{{ wtf.form_field(form.email) }}
 			{{ wtf.form_field(form.password) }}
 			<button class="btn btn-lg btn-primary btn-block" type="submit" value="Login" name="login">Sign Up</button>
+			<em>Already registered?</em><a href="{{ url_for('login') }}"> Log in</a>
 		</form>
 
-	</div>
+</div>
 {% endblock %}
