@@ -13,7 +13,16 @@ class User(Base):
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
+    join_date = db.Column(db.DateTime)
     picture = db.Column(db.String(250))
+
+class Doctor(Base):
+    __tablename__ = 'doctor'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(50), unique=True)
+
+
 
 engine = create_engine('mysql://root:supersecure@db/mbp')
 
