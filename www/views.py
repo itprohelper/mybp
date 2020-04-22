@@ -69,6 +69,18 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+@app.route('/newreading')
+def newreading():
+    return 'New Blood Pressure Readings here'
+
+@app.route('/editreading')
+def editreading():
+    return 'Edit readings here'
+
+@app.route('/deletereading')
+def deletereading():
+    return 'Delete readings'
+
 @app.route('/about')
 def about():
   return 'Hola About MBP'

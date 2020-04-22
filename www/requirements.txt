@@ -4,3 +4,4 @@ mysqlclient
 flask-wtf
 flask-bootstrap
 flask-login
+email_validator
