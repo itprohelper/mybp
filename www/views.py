@@ -81,6 +81,22 @@ def editreading():
 def deletereading():
     return 'Delete readings'
 
+@app.route('/profile')
+def profile():
+    return 'Profile here'
+
+@app.route('/settings')
+def settings():
+    return 'Settings here'
+
+@app.route('/reports')
+def reports():
+    return 'Reports here'
+
+@app.route('/export')
+def export():
+    return 'Export here'
+
 @app.route('/about')
 def about():
   return 'Hola About MBP'
