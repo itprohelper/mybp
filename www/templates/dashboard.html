@@ -6,7 +6,8 @@ Dashboard
 
 {% block styles %}
 {{super()}}
-<link rel="stylesheet" href="{{url_for('static', filename='css/dashboard.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
 {% endblock %}
 
 {% block content %}
@@ -59,7 +60,7 @@ Dashboard
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Welcome, {{ name }} <button type="button" class="btn btn-success" data-toggle="modal"
-            data-target="#mymodal"  name="button">New Reading</button></h1>
+            data-target="#mymodal" name="button">New Reading</button></h1>
           <h2 class="sub-header">Last few days readings<h2>
 
           <div class="row placeholders">
@@ -106,11 +107,64 @@ Dashboard
                   <td>125</td>
                   <td>89</td>
                   <td>Vi demasiadas noticias hoy.</td>
-                  <td><a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modeledit">Edit</a>
+                  <td><a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Edit</a>
                       <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
                   </td>
 
                 </tr>
+
+                <!-- Modal Edit readings -->
+<div id="modaledit" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+          <h4 class="modal-title">Update readings</h4>
+        </div>
+
+
+
+<div class="modal-body">
+  <form action="" method="POST">
+
+    <div class="form-group">
+      <label>Date</label>
+      <input type="hidden" name="id" value="date">
+      <input type="date" class="form-control" name="date" value="date">
+      </div>
+
+      <div class="form-group">
+        <label>Systolic:</label>
+        <input type="number" class="form-control" name="systolic" value="125">
+      </div>
+
+      <div class="form-group">
+        <label>Diagstolic:</label>
+        <input type="number" class="form-control" name="diagstolic" value="85">
+      </div>
+
+      <div class="form-group">
+        <label>Notes:</label>
+        <input type="number" class="form-control" name="notes" value="notes">
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Update</button>
+      </div>
+
+    </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+                <!-- End Modal Edit readings -->
                 <tr>
                   <td>1,002</td>
                   <td>amet</td>
@@ -219,6 +273,50 @@ Dashboard
               </tbody>
             </table>
           </div>
+          <!-- Modal add reading -->
+          <div id="mymodal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <h4 class="modal-title">Add reading</h4>
+                </div>
+                  <div class="modal-body">
+
+                    <form action="" method="POST">
+                      <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" class="form-control" name="date" required="1">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Systolic:</label>
+                        <input type="number" class="form-control" name="systolic" required="1">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Diagstolic</label>
+                        <input type="number" class="form-control" name="diagstolic" required="1">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Notes</label>
+                        <input type="text" class="form-control" name="notes" required="0">
+                      </div>
+
+                      <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Add Readings</button>
+                      </div>
+
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                 </div>
+                 </div>
+                 </div>
+                 <!-- End add reading -->
         </div>
       </div>
     </div>
