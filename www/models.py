@@ -1,4 +1,5 @@
 from index import db
+from datetime import datetime
 from forms import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
@@ -40,7 +41,7 @@ class Readings(db.Model):
     notes = db.Column(db.String(250))
 
     def __init__(self, date, systolic, diastolic, notes):
-        self.date = date
+        self.date = datetime.now()
         self.systolic = systolic
         self.diastolic = diastolic
         self.notes = notes
