@@ -1,6 +1,6 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, validates
 from sqlalchemy import create_engine
 from index import db
 
@@ -21,6 +21,20 @@ class Doctor(Base):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), unique=True)
     email = db.Column(db.String(50), unique=True)
+
+class Readings(Base):
+    __tablename__ = 'readings'
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime())
+    systolic = db.Column(db.Integer())
+    diastolic = db.Column(db.Integer())
+    notes = db.Column(db.String(250))
+
+    @validates('systolic')
+    def validate_systolic(self, key, value):
+        assert value >= 0
+        assert value <= 999
+        return value
 
 
 

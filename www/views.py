@@ -1,8 +1,8 @@
 from index import app
 from index import db
-from models import User
+from models import User, Readings
 from forms import LoginForm, SignupForm
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -69,9 +69,19 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/newreading')
+@app.route('/newreading', methods = ['POST'])
 def newreading():
-    return 'New Blood Pressure Readings here'
+    if request.method == 'POST':
+        date = request.form['date']
+        systolic = request.form['systolic']
+        diastolic = request.form['diastolic']
+        notes = request.form['notes']
+
+        my_data = Readings(date, systolic, diastolic, notes)
+        db.session.add(my_data)
+        db.session.commit()
+
+        return redirect(url_for('home'))
 
 @app.route('/editreading')
 def editreading():

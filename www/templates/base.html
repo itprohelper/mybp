@@ -1,0 +1,19 @@
+<html>
+<head>
+  <link href="{{url_for('static', filename= 'css/bootstrap.min.css')}}" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/starter-template.css')}}">
+  <meta charset="utf-8">
+
+<title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+  {% block body %}  {% endblock %}
+
+  <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.5.0.min.js') }}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+  </body>
+</html>

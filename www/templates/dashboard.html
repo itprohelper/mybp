@@ -94,7 +94,7 @@ Dashboard
                   <th>Day</th>
                   <th>Time</th>
                   <th>Systolic</th>
-                  <th>Diagstolic</th>
+                  <th>diastolic</th>
                   <th>Notes</th>
                   <th>Actions</th>
 
@@ -139,8 +139,8 @@ Dashboard
       </div>
 
       <div class="form-group">
-        <label>Diagstolic:</label>
-        <input type="number" class="form-control" name="diagstolic" value="85">
+        <label>diastolic:</label>
+        <input type="number" class="form-control" name="diastolic" value="85">
       </div>
 
       <div class="form-group">
@@ -283,7 +283,7 @@ Dashboard
                 </div>
                   <div class="modal-body">
 
-                    <form action="" method="POST">
+                    <form action="{{url_for('newreading')}}" method="POST">
                       <div class="form-group">
                         <label>Date</label>
                         <input type="date" class="form-control" name="date" required="1">
@@ -295,8 +295,8 @@ Dashboard
                       </div>
 
                       <div class="form-group">
-                        <label>Diagstolic</label>
-                        <input type="number" class="form-control" name="diagstolic" required="1">
+                        <label>Diastolic</label>
+                        <input type="number" class="form-control" name="diastolic" required="1">
                       </div>
 
                       <div class="form-group">
