@@ -61,7 +61,9 @@ def signup():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', name=current_user.username)
+    all_readings = Readings.query.all()
+    return render_template(
+        'dashboard.html', name=current_user.username, systolic=all_readings)
 
 @app.route('/logout')
 @login_required
