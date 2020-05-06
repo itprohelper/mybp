@@ -63,7 +63,7 @@ def signup():
 def dashboard():
     all_readings = Readings.query.all()
     return render_template(
-        'dashboard.html', name=current_user.username, systolic=all_readings)
+        'dashboard.html', name=current_user.username, all_readings=all_readings)
 
 @app.route('/logout')
 @login_required
@@ -88,9 +88,20 @@ def newreading():
 
         return redirect(url_for('dashboard'))
 
-@app.route('/editreading')
+@app.route('/editreading', methods = ['GET', 'POST'])
 def editreading():
-    return 'Edit readings here'
+
+    if request.method == 'POST':
+        e_data = Readings.query.get(request.form.get('id'))
+
+        e_data.systolic = request.form['systolic']
+        e_data.diastolic = request.form['diastolic']
+        e_data.notes = request.form['notes']
+
+        db.session.commit()
+        flash("Readings updated successfully")
+
+        return redirect(url_for('dashboard'))
 
 @app.route('/deletereading')
 def deletereading():
