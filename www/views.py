@@ -103,9 +103,14 @@ def editreading():
 
         return redirect(url_for('dashboard'))
 
-@app.route('/deletereading')
-def deletereading():
-    return 'Delete readings'
+@app.route('/deletereading/<id>', methods = ['GET', 'POST'])
+def deletereading(id):
+    d_data = Readings.query.get(id)
+    db.session.delete(d_data)
+    db.session.commit()
+    flash("Readings deleted successfully")
+
+    return redirect(url_for('dashboard'))
 
 @app.route('/profile')
 def profile():

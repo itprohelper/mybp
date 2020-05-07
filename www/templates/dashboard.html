@@ -132,7 +132,7 @@ Dashboard
                   <td>{{row.diastolic}}</td>
                   <td>{{row.notes}}</td>
                   <td><a href="/editreading/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
-                      <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                      <a href="/deletereading/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
                   </td>
 
                 </tr>
