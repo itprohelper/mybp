@@ -1,6 +1,6 @@
 from index import db
-from datetime import datetime
 from forms import FlaskForm
+from datetime import datetime
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 from flask_login import UserMixin
@@ -18,15 +18,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('password')
     remember = BooleanField('remember me')
 
-#class LoginForm(FlaskForm):
-#    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-#    password = StringField('password', validators=[InputRequired(), Length(min=8, max=80)])
-#    remember = BooleanField('remember me')
-
-#class SignupForm(FlaskForm):
-#    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-#    email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-#    password = StringField('password', validators=[InputRequired(), Length(min=8, max=80)])
 class SignupForm(FlaskForm):
     username = StringField('username')
     email = StringField('email')

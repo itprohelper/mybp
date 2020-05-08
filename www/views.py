@@ -1,6 +1,6 @@
 from index import app
 from index import db
-from models import User, Readings
+from models import User, Readings, datetime
 from forms import LoginForm, SignupForm
 from flask import render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -32,15 +32,8 @@ def login():
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('dashboard'))
 
-            # if user.password == form.password.data:
+            return '<h1>Invalid username or password</h1>'
 
-
-        return '<h1>Invalid username or password</h1>'
-
-        #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
-
-    #if form.validate_on_submit():
-    #    return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
     return render_template('login.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -54,7 +47,6 @@ def signup():
         db.session.commit()
 
         return '<h1>New user has been created!</h1>'
-#         return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
 
     return render_template('signup.html', form=form)
 
@@ -74,13 +66,13 @@ def logout():
 @app.route('/newreading', methods = ['POST'])
 def newreading():
     if request.method == 'POST':
-        date = 'Todays date'
-        # date = request.form['date']
+        #date = date.today()
+        date = request.form['date']
         systolic = request.form['systolic']
         diastolic = request.form['diastolic']
         notes = request.form['notes']
 
-        my_data = Readings(date, systolic, diastolic, notes)
+        my_data = Readings(date,systolic, diastolic, notes)
         db.session.add(my_data)
         db.session.commit()
 
