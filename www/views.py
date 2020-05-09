@@ -1,7 +1,7 @@
 from index import app
 from index import db
 from models import User, Readings, datetime
-from forms import LoginForm, SignupForm
+from forms import LoginForm, SignupForm, NewReading
 from flask import render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
@@ -63,22 +63,36 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/newreading', methods = ['POST'])
+@app.route('/newreading', methods = ['GET','POST'])
 def newreading():
+    #form = NewReading()
+
+    #if form.validate_on_submit():
+        #Todo todaydate = datetime.now()
+        #new_reading = Readings(date=form.date.data, systolic=form.systolic.data, diastolic=form.diastolic.data, notes=form.notes.data)
+        # date = 'somedate'
+        # systolic = Systolic(systolic=form.systolic.data)
+        # diastolic = Diastolic(diastolic=form.diastolic.data)
+        # notes = Notes(notes=form.notes.data)
+
+
     if request.method == 'POST':
-        #date = date.today()
-        date = request.form['date']
+        tdate = datetime.now()
+        date = tdate;
+        #date = request.form['date']
         systolic = request.form['systolic']
         diastolic = request.form['diastolic']
         notes = request.form['notes']
 
+
         my_data = Readings(date,systolic, diastolic, notes)
+        # db.session.add(new_reading)
         db.session.add(my_data)
         db.session.commit()
 
         flash("New reading created successfully")
 
-        return redirect(url_for('dashboard'))
+    return redirect(url_for('dashboard'))
 
 @app.route('/editreading', methods = ['GET', 'POST'])
 def editreading():

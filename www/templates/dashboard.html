@@ -1,4 +1,6 @@
 {% extends "bootstrap/base.html" %}
+{% from 'bootstrap/wtf.html' import form_field %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
 Dashboard | My BP
@@ -147,8 +149,6 @@ Dashboard | My BP
           <h4 class="modal-title">Update readings</h4>
         </div>
 
-
-
 <div class="modal-body">
   <form action="{{url_for('editreading')}}" method="POST">
 
@@ -164,7 +164,7 @@ Dashboard | My BP
       </div>
 
       <div class="form-group">
-        <label>diastolic:</label>
+        <label>Diastolic:</label>
         <input type="number" class="form-control" name="diastolic" value="{{row.diastolic}}">
       </div>
 
@@ -193,8 +193,11 @@ Dashboard | My BP
             </table>
           </div>
 
+
+
           <!-- Modal add reading -->
-          <div id="mymodal" class="modal fade" role="dialog">
+          {% for d in all_readings %}
+        <div id="mymodal" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -206,7 +209,8 @@ Dashboard | My BP
                     <form action="{{url_for('newreading')}}" method="POST">
                       <div class="form-group">
                         <label>Today's date is</label>
-                        <input type="date" class="form-control" name="date" required="0">
+                        {{d.date}}
+                        <!-- <input type="date" class="form-control" name="date" required="0"> -->
                       </div>
 
                       <div class="form-group">
@@ -236,6 +240,7 @@ Dashboard | My BP
                  </div>
                  </div>
                  </div>
+                 {% endfor %}
                  <!-- End add reading -->
         </div>
       </div>
