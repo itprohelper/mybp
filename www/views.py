@@ -50,13 +50,15 @@ def signup():
 
     return render_template('signup.html', form=form)
 
-@app.route('/dashboard')
+
+@app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
     form = NewReading()
     all_readings = Readings.query.all()
     return render_template(
         'dashboard.html', name=current_user.username, all_readings=all_readings, form=form)
+
 
 @app.route('/logout')
 @login_required
@@ -67,7 +69,22 @@ def logout():
 @app.route('/newreading', methods=['GET', 'POST'])
 def newreading():
     form = NewReading()
-    return render_template('dashboard.html', form=form)
+    if request.method == 'POST' and form.validate_on_submit():
+        date = form.date.data
+        systolic = form.systolic.data
+        diastolic = form.diastolic.data
+        notes = form.notes.data
+
+        new_reading = Readings(date,systolic, diastolic, notes)
+        #new_reading = Readings(date=form.date.data, systolic=form.systolic.data, diastolic=form.diastolic.data, notes=form.notes.data)
+        db.session.add(new_reading)
+        db.session.commit()
+
+        flash("New reading created successfully")
+    return redirect(url_for('dashboard'))
+    #return render_template('dashboard.html', form=form)
+
+
 
 # @app.route('/newreading', methods = ['GET','POST'])
 # def newreading():

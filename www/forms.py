@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, IntegerField, DateTimeField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, IntegerField, DateTimeField, SubmitField, DateField
 from wtforms.validators import InputRequired, Email, Length
 
 
@@ -14,7 +14,7 @@ class SignupForm(FlaskForm):
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
 
 class NewReading(FlaskForm):
-    date = DateTimeField('Today\'s Date')
+    date = DateField('entrydate', format='%Y/%m/%d')
     systolic = IntegerField('Systolic', validators=[InputRequired()])
     diastolic = IntegerField('Diastolic', validators=[InputRequired()])
     notes = StringField('Notes', validators=[InputRequired(), Length(max=180)])

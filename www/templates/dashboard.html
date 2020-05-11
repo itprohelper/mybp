@@ -197,7 +197,7 @@ Dashboard | My BP
 
 
           <!-- Modal add reading -->
-          {% for d in all_readings %}
+
         <div id="mymodal" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -206,15 +206,12 @@ Dashboard | My BP
                 </div>
 
                   <div class="modal-body">
-                    <form class="form-horizontal", method="POST" action="{{url_for('newreading')}}">
-                    <!-- <form action="{{url_for('newreading')}}" method="POST"> -->
-                      <!-- {{ render_field(form.date, value=d.date) }} -->
-                      <div class="form-group">
-                        <label>Today's date is</label>
-                        {{d.date}}
-                        <!-- <input type="date" class="form-control" name="date" required="0"> -->
-                      </div>
+                    <form class="form-horizontal" method="POST" action="{{url_for('newreading')}}">
 
+
+
+                      {{ form.hidden_tag() }}
+                      {{ render_field(form.date, placeholder="YYYY/mm/dd") }} <!--cambiar en auto populate fecha-->
                       {{ render_field(form.systolic, placeholder=form.systolic.label.text) }}
                       {{ render_field(form.diastolic, placeholder=form.diastolic.label.text) }}
                       {{ render_field(form.notes, placeholder=form.notes.label.text) }}
@@ -246,7 +243,7 @@ Dashboard | My BP
                  </div>
                  </div>
                  </div>
-                 {% endfor %}
+
                  <!-- End add reading -->
         </div>
       </div>
