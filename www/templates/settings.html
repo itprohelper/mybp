@@ -1,5 +1,5 @@
 <!-- Navigation -->
-{% extends 'bootstrap/base.html' %}
+{% extends "bootstrap/base.html" %}
 {% from 'bootstrap/wtf.html' import form_field %}
 {% import "bootstrap/wtf.html" as wtf %}
 
@@ -8,8 +8,9 @@ Settings | My BP
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 {{super()}}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
 {% endblock %}
 
 {% block content %}
@@ -37,7 +38,7 @@ Settings | My BP
         </div>
       </div>
     </nav>
-    test
+
 
     <div class="container-fluid">
       <div class="row">
@@ -80,6 +81,7 @@ Settings | My BP
             </div>
             </div>
             </div>
+            </div>
 
 
 
@@ -92,9 +94,24 @@ Settings | My BP
 
 <!-- Page Content -->
 <div class="container">
-  <h1 class="mt-4">Logo Nav by Start Bootstrap</h1>
-  <p>The logo in the navbar is now a default Bootstrap feature in Bootstrap 4! Make sure to set the width and height of the logo within the HTML or with CSS. For best results, use an SVG image as your logo.</p>
+  <h1 class="mt-4">Profile</h1>
+  <ul>
+  <li>Username cannot be changed</li>
+  <li>Email</li>
+  <li>Phone</li>
+  <li>DOB</li>
+  <li>City, Country</li>
+  </ul>
+
+  </ul>
+    <h1 class="mt-4">Preferences</h1>
+    <h2 class="mt-4">Doctor's info</h2>
+    <ul>
+    <li>Doctor name</li>
+    <li>Doctor email</li>
+    <li>Email doctor your readings? checkbox aqui</li>
+    </ul>
 </div>
-  </div>
+
 <!-- /.container -->
 {% endblock %}
