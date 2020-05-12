@@ -141,13 +141,13 @@ def deletereading(id):
 
     return redirect(url_for('dashboard'))
 
-@app.route('/profile')
-def profile():
-    return 'Profile here'
+# @app.route('/profile')
+# def profile():
+#     return 'Profile here with info: Name, age, City and Country,'
 
 @app.route('/settings')
 def settings():
-    return 'Settings here'
+    return render_template('settings.html')
 
 @app.route('/reports')
 def reports():
