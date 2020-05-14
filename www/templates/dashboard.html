@@ -29,7 +29,7 @@ Dashboard | My BP
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Dashboard</a></li>
             <li><a href="{{ url_for('settings') }}">Settings</a></li>
-            
+
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
           </ul>
           <form class="navbar-form navbar-right">
@@ -211,7 +211,7 @@ Dashboard | My BP
 
 
                       {{ form.hidden_tag() }}
-                      {{ render_field(form.date, placeholder="YYYY/mm/dd") }} <!--cambiar en auto populate fecha-->
+                      {{ render_field(form.date) }} <!--cambiar en auto populate fecha-->
                       {{ render_field(form.systolic, placeholder=form.systolic.label.text) }}
                       {{ render_field(form.diastolic, placeholder=form.diastolic.label.text) }}
                       {{ render_field(form.notes, placeholder=form.notes.label.text) }}
