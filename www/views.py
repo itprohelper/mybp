@@ -46,7 +46,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        return '<h1>New user has been created!</h1>'
+        flash("New account created successfully")
 
     return render_template('signup.html', form=form)
 
