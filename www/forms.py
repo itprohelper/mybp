@@ -7,13 +7,15 @@ from wtforms.fields.html5 import DateField
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
-    remember = BooleanField('remember me')
+    submit = SubmitField('Submit')
+    remember = BooleanField('Remember me')
 
 class SignupForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     confirm_password = PasswordField('Confirm Password', validators=[InputRequired(), EqualTo('password')])
+    submit = SubmitField('Submit')
 
 class NewReading(FlaskForm):
     date = DateField('Date', format='%Y-%m-%d', validators=[InputRequired()])
