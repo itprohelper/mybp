@@ -32,8 +32,8 @@ def login():
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('dashboard'))
 
-        # flash("Invalid")
-            return '<h1>Invalid username or password</h1>'
+        flash("Invalid username of password")
+        # return '<h1>Invalid username or password</h1>'
 
     return render_template('login.html', form=form)
 
@@ -48,7 +48,7 @@ def signup():
         db.session.commit()
 
         flash("New account created successfully")
-        # return redirect(url_for('home'))
+
     return render_template('signup.html', form=form)
 
 
