@@ -70,7 +70,7 @@ def logout():
 @app.route('/newreading', methods=['GET', 'POST'])
 def newreading():
     form = NewReading()
-    if request.method == 'POST' and form.validate_on_submit():
+    if  request.method == 'POST' and form.validate_on_submit():
         date = form.date.data
         systolic = form.systolic.data
         diastolic = form.diastolic.data

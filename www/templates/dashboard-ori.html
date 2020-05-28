@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 {% from 'bootstrap/wtf.html' import form_field %}
 {% import "bootstrap/wtf.html" as wtf %}
-<!-- {% from "_render_field.html" import render_field %} -->
+{% from "_render_field.html" import render_field %}
 
 {% block title %}
 Dashboard | My BP
@@ -202,18 +202,19 @@ Dashboard | My BP
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Add Reading</h4>
+                  <h4 class="modal-title">Add reading</h4>
                 </div>
 
                   <div class="modal-body">
-                    <form method="POST" action="{{url_for('newreading')}}">
+                    <form class="form-horizontal" method="POST" action="{{url_for('newreading')}}">
+
+
 
                       {{ form.hidden_tag() }}
-                      {{ wtf.form_field(form.date) }}  <!--cambiar en auto populate fecha talvez-->
-                      {{ wtf.form_field(form.systolic) }}
-                      {{ wtf.form_field(form.diastolic) }}
-                      {{ wtf.form_field(form.notes) }}
-                      {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
+                      {{ render_field(form.date) }} <!--cambiar en auto populate fecha-->
+                      {{ render_field(form.systolic, placeholder=form.systolic.label.text) }}
+                      {{ render_field(form.diastolic, placeholder=form.diastolic.label.text) }}
+                      {{ render_field(form.notes, placeholder=form.notes.label.text) }}
                       <!-- <div class="form-group">
                         <label>Systolic:</label>
                         <input type="number" class="form-control" name="systolic" required="1">
@@ -229,9 +230,9 @@ Dashboard | My BP
                         <input type="text" class="form-control" name="notes" required="0">
                       </div> -->
 
-                      <!-- <div class="form-group">
+                      <div class="form-group">
                         <button class="btn btn-primary" type="submit">Add Readings</button>
-                      </div> -->
+                      </div>
 
                     </form>
                     </div>
