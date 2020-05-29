@@ -33,7 +33,7 @@ def login():
                 return redirect(url_for('dashboard'))
 
         flash("Invalid username of password")
-        # return '<h1>Invalid username or password</h1>'
+
 
     return render_template('login.html', form=form)
 
@@ -70,7 +70,7 @@ def logout():
 @app.route('/newreading', methods=['GET', 'POST'])
 def newreading():
     form = NewReading()
-    if  request.method == 'POST' and form.validate_on_submit():
+    if  form.validate_on_submit():
         date = form.date.data
         systolic = form.systolic.data
         diastolic = form.diastolic.data
