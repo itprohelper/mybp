@@ -82,8 +82,9 @@ def newreading():
         db.session.commit()
 
         flash("New reading created successfully")
-    return redirect(url_for('dashboard'))
-    #return render_template('dashboard.html', form=form)
+
+        return redirect(url_for('dashboard'))
+    return render_template('newreading.html', form=form)
 
 
 

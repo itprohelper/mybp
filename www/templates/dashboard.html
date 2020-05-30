@@ -64,7 +64,8 @@ Dashboard | My BP
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Welcome, {{ name }} <button type="button" class="btn btn-success" data-toggle="modal"
             data-target="#mymodal" name="button">New Reading</button></h1>
-
+            <a href="{{ url_for('newreading') }}">New Reading</a>
+<!-- Displays flash message -->
             {% with messages = get_flashed_messages() %}
 
             {% if messages %}
@@ -76,7 +77,6 @@ Dashboard | My BP
                 <span aria-hidden="true">X</span>
               </button>
               {{message}}
-
             </div>
 
 
@@ -86,6 +86,7 @@ Dashboard | My BP
             {% endif %}
 
             {% endwith %}
+            <!-- End Displays flash message -->
           <h2 class="sub-header">Latest readings<h2>
 
           <div class="row placeholders">
