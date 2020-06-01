@@ -62,9 +62,11 @@ Dashboard | My BP
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Welcome, {{ name }} <button type="button" class="btn btn-success" data-toggle="modal"
-            data-target="#mymodal" name="button">New Reading</button></h1>
-            <a href="{{ url_for('newreading') }}">New Reading</a>
+          <h1 class="page-header">Welcome, {{ name }} <a href="{{ url_for('newreading') }}" class="btn btn-success"> New Reading</a></h1>
+
+
+
+
 <!-- Displays flash message -->
             {% with messages = get_flashed_messages() %}
 
