@@ -8,19 +8,16 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = 'user'
-
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
     join_date = db.Column(db.DateTime)
     picture = db.Column(db.String(250))
+    reading = db.relationship('Readings', backref='user', lazy='dynamic')
 
-class Doctor(Base):
-    __tablename__ = 'doctor'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), unique=True)
-    email = db.Column(db.String(50), unique=True)
+    def __repr_(self):
+        return '<User %r>' % self.username
 
 class Readings(Base):
     __tablename__ = 'readings'
@@ -29,13 +26,13 @@ class Readings(Base):
     systolic = db.Column(db.Integer())
     diastolic = db.Column(db.Integer())
     notes = db.Column(db.String(250))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    @validates('systolic')
-    def validate_systolic(self, key, value):
-        assert value >= 0
-        assert value <= 999
-        return value
-
+class Doctor(Base):
+    __tablename__ = 'doctor'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(50), unique=True)
 
 
 engine = create_engine('mysql://root:supersecure@db/mbp')
