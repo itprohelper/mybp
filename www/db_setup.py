@@ -1,6 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, validates
+from sqlalchemy.orm import relationship, validates, sessionmaker
 from sqlalchemy import create_engine
 from index import db
 
@@ -33,6 +33,7 @@ class Doctor(Base):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), unique=True)
     email = db.Column(db.String(50), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 engine = create_engine('mysql://root:supersecure@db/mbp')

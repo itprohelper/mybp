@@ -3,7 +3,7 @@ from flask import Flask, Markup
 from flask import render_template, request, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, asc
-from sqlalchemy.orm import sessionmaker
+# from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 
 

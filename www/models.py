@@ -36,9 +36,3 @@ class Readings(db.Model):
         self.systolic = systolic
         self.diastolic = diastolic
         self.notes = notes
-
-    # @validates('systolic')
-    # def validate_systolic(self, key, value):
-    #     assert value >= 0
-    #     assert value <= 999
-    #     return value
