@@ -1,6 +1,6 @@
 from index import app
 from index import db
-from models import User, Readings, datetime
+from models import User, Readings, Doctor, datetime
 from forms import LoginForm, SignupForm, NewReading
 from flask import render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -45,7 +45,7 @@ def signup():
         hashed_password = generate_password_hash(form.password.data, method='sha256')
         new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
 
-
+        #porque?
         user = User.query.filter_by(email=form.email.data).first()
 
         if user:
@@ -83,8 +83,9 @@ def newreading():
         systolic = form.systolic.data
         diastolic = form.diastolic.data
         notes = form.notes.data
+        # user_id = current_user.id
 
-        new_reading = Readings(date,systolic, diastolic, notes)
+        new_reading = Readings(date=date,systolic=systolic, diastolic=diastolic, notes=notes,user_id=current_user.id)
         #new_reading = Readings(date=form.date.data, systolic=form.systolic.data, diastolic=form.diastolic.data, notes=form.notes.data)
         db.session.add(new_reading)
         db.session.commit()
