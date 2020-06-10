@@ -1,8 +1,8 @@
-from index import db
-from forms import FlaskForm
+from mbp import db
+# from forms import FlaskForm
 from datetime import datetime
-from wtforms import StringField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Email, Length
+# from wtforms import StringField, PasswordField, BooleanField
+# from wtforms.validators import InputRequired, Email, Length
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship, validates, sessionmaker
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime

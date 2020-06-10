@@ -1,7 +1,7 @@
-from index import app
-from index import db
-from models import User, Readings, Doctor, datetime
-from forms import LoginForm, SignupForm, NewReading
+from mbp import app
+from mbp import db
+from mbp.models import User, Readings, Doctor, datetime
+from mbp.forms import LoginForm, SignupForm, NewReading
 from flask import render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
