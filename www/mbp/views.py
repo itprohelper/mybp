@@ -83,10 +83,8 @@ def newreading():
         systolic = form.systolic.data
         diastolic = form.diastolic.data
         notes = form.notes.data
-        # user_id = current_user.id
-
+        
         new_reading = Readings(date=date,systolic=systolic, diastolic=diastolic, notes=notes,user_id=current_user.id)
-        #new_reading = Readings(date=form.date.data, systolic=form.systolic.data, diastolic=form.diastolic.data, notes=form.notes.data)
         db.session.add(new_reading)
         db.session.commit()
 
@@ -95,38 +93,6 @@ def newreading():
         return redirect(url_for('dashboard'))
     return render_template('newreading.html', form=form)
 
-
-
-# @app.route('/newreading', methods = ['GET','POST'])
-# def newreading():
-#     #form = NewReading()
-#
-#     #if form.validate_on_submit():
-#         #Todo todaydate = datetime.now()
-#         #new_reading = Readings(date=form.date.data, systolic=form.systolic.data, diastolic=form.diastolic.data, notes=form.notes.data)
-#         # date = 'somedate'
-#         # systolic = Systolic(systolic=form.systolic.data)
-#         # diastolic = Diastolic(diastolic=form.diastolic.data)
-#         # notes = Notes(notes=form.notes.data)
-#
-#
-#     if request.method == 'POST':
-#         tdate = datetime.now()
-#         date = tdate;
-#         #date = request.form['date']
-#         systolic = request.form['systolic']
-#         diastolic = request.form['diastolic']
-#         notes = request.form['notes']
-#
-#
-#         my_data = Readings(date,systolic, diastolic, notes)
-#         # db.session.add(new_reading)
-#         db.session.add(my_data)
-#         db.session.commit()
-#
-#         flash("New reading created successfully")
-#
-#     return redirect(url_for('dashboard'))
 
 @app.route('/editreading', methods = ['GET', 'POST'])
 def editreading():
@@ -152,13 +118,10 @@ def deletereading(id):
 
     return redirect(url_for('dashboard'))
 
-# @app.route('/profile')
-# def profile():
-#     return 'Profile here with info: Name, age, City and Country,'
 
 @app.route('/settings')
 def settings():
-    return render_template('settings.html')
+    return render_template('settings.html', title= 'Account Settings')
 
 @app.route('/reports')
 def reports():

@@ -63,7 +63,7 @@ Settings | My BP
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Settings for {{ name }} <button type="button" class="btn btn-success" data-toggle="modal"
+          <h1 class="page-header">Settings for {{ current_user.username }} <button type="button" class="btn btn-success" data-toggle="modal"
             data-target="#mymodal" name="button">Save changes</button></h1>
 
             {% with messages = get_flashed_messages() %}
@@ -95,15 +95,15 @@ Settings | My BP
 <!-- Page Content -->
 <div class="container">
   <h1 class="mt-4">Profile</h1>
+
   <ul>
-  <li>Username cannot be changed</li>
-  <li>Email</li>
-  <li>Phone</li>
+  <li>{{ current_user.username }} Username cannot be changed</li>
+  <li>{{ current_user.email}}</li>
+  <li>Password</li>
   <li>DOB</li>
   <li>City, Country</li>
   </ul>
 
-  </ul>
     <h1 class="mt-4">Preferences</h1>
     <h2 class="mt-4">Doctor's info</h2>
     <ul>
