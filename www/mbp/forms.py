@@ -1,7 +1,9 @@
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, BooleanField, IntegerField, SubmitField, DateField, TextAreaField, DecimalField
-from wtforms.validators import InputRequired, Email, Length, NumberRange, EqualTo, DataRequired
+from wtforms.validators import InputRequired, Email, Length, NumberRange, EqualTo, DataRequired, ValidationError
 from wtforms.fields.html5 import DateField
+from mbp.models import User
 
 
 class LoginForm(FlaskForm):
@@ -15,7 +17,7 @@ class SignupForm(FlaskForm):
     email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     confirm_password = PasswordField('Confirm Password', validators=[InputRequired(), EqualTo('password')])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Sign Up')
 
 class NewReading(FlaskForm):
     date = DateField('Date', format='%Y-%m-%d', validators=[InputRequired()]) #difficult to enter day without from wtforms.fields.html5 import DateField
@@ -23,3 +25,20 @@ class NewReading(FlaskForm):
     diastolic = IntegerField('Diastolic', validators=[InputRequired(), NumberRange(min=50, max=140, message="This value must be between 50 to 140")])
     notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=120)])
     submit = SubmitField('Add Reading')
+
+class UpdateAccountForm(FlaskForm):
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    submit = SubmitField('Update')
+
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('That username is taken. Please choose a different one')
+
+    def validate_email(self, email):
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('That email is taken. Please choose a different one')

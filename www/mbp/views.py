@@ -1,7 +1,7 @@
 from mbp import app
 from mbp import db
 from mbp.models import User, Readings, Doctor, datetime
-from mbp.forms import LoginForm, SignupForm, NewReading
+from mbp.forms import LoginForm, SignupForm, NewReading, UpdateAccountForm
 from flask import render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
@@ -83,7 +83,7 @@ def newreading():
         systolic = form.systolic.data
         diastolic = form.diastolic.data
         notes = form.notes.data
-        
+
         new_reading = Readings(date=date,systolic=systolic, diastolic=diastolic, notes=notes,user_id=current_user.id)
         db.session.add(new_reading)
         db.session.commit()
@@ -119,9 +119,21 @@ def deletereading(id):
     return redirect(url_for('dashboard'))
 
 
-@app.route('/settings')
+@app.route('/settings', methods=['GET', 'POST'])
+@login_required
 def settings():
-    return render_template('settings.html', title= 'Account Settings')
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated.', 'success')
+        return redirect(url_for('settings'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    picture = url_for('static', filename='profile_pics/' + current_user.picture)
+    return render_template('settings.html', title= 'Account Settings', picture=picture, form=form)
 
 @app.route('/reports')
 def reports():
