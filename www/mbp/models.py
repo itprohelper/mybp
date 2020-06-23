@@ -1,12 +1,9 @@
 from mbp import db
-# from forms import FlaskForm
 from datetime import datetime
-# from wtforms import StringField, PasswordField, BooleanField
-# from wtforms.validators import InputRequired, Email, Length
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship, validates, sessionmaker
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, asc
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
@@ -16,7 +13,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(80))
     join_date = db.Column(db.DateTime)
     picture = db.Column(db.String(20), nullable=False, default='default.jpg')
-    reading = db.relationship('Readings', backref='patient', lazy='dynamic')
+    #reading = db.relationship('Readings', backref='patient', lazy='dynamic')
 
     def __repr__(self):
         # return '<User %r>' % self.username, self.email, self.picture
@@ -30,6 +27,7 @@ class Readings(db.Model):
     diastolic = db.Column(db.Integer())
     notes = db.Column(db.String(250))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = relationship(User)
 
 
     def __repr__(self):
@@ -38,6 +36,6 @@ class Readings(db.Model):
 class Doctor(db.Model):
     __tablename__ = 'doctor'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), unique=True)
-    email = db.Column(db.String(50), unique=True)
+    name = db.Column(db.String(150), unique=False)
+    email = db.Column(db.String(50), unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

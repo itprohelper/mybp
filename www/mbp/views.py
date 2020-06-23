@@ -6,6 +6,7 @@ from flask import render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask import session as login_session
 
 Bootstrap(app)
 
@@ -64,9 +65,15 @@ def signup():
 @login_required
 def dashboard():
     form = NewReading()
-    all_readings = Readings.query.all()
+    user_readings = Readings.query.all()
+    # user_readings = Readings.query
+    current_user.systolic = form.systolic.data
+    # return render_template(
+    #     'dashboard.html', name=current_user.username, user_readings=user_readings, form=form)
+        #aqui puede ser para enseñar readings de un solo user a la vez
     return render_template(
-        'dashboard.html', name=current_user.username, all_readings=all_readings, form=form)
+        'dashboard.html', name=current_user.username, systolic=current_user.systolic, user_id=current_user.id, user_readings=user_readings, form=form)
+
 
 
 @app.route('/logout')
@@ -80,11 +87,11 @@ def newreading():
     form = NewReading()
     if  form.validate_on_submit():
         date = form.date.data
-        systolic = form.systolic.data
-        diastolic = form.diastolic.data
-        notes = form.notes.data
+        current_user.systolic = form.systolic.data
+        current_user.diastolic = form.diastolic.data
+        current_user.notes = form.notes.data
 
-        new_reading = Readings(date=date,systolic=systolic, diastolic=diastolic, notes=notes,user_id=current_user.id)
+        new_reading = Readings(date=date,systolic=current_user.systolic, diastolic=current_user.diastolic, notes=current_user.notes,user_id=current_user.id)
         db.session.add(new_reading)
         db.session.commit()
 
