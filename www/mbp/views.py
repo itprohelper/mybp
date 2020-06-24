@@ -65,9 +65,13 @@ def signup():
 @login_required
 def dashboard():
     form = NewReading()
-    user_readings = Readings.query.all()
-    # user_readings = Readings.query
+    #user_readings = Readings.query.all()
     current_user.systolic = form.systolic.data
+    
+    #user_readings = Readings.query.filter_by(user_id=current_user).all()
+
+    user_readings = db.session.query(Readings).filter_by(user_id=current_user.id).all()
+
     # return render_template(
     #     'dashboard.html', name=current_user.username, user_readings=user_readings, form=form)
         #aqui puede ser para enseñar readings de un solo user a la vez
@@ -91,7 +95,7 @@ def newreading():
         current_user.diastolic = form.diastolic.data
         current_user.notes = form.notes.data
 
-        new_reading = Readings(date=date,systolic=current_user.systolic, diastolic=current_user.diastolic, notes=current_user.notes,user_id=current_user.id)
+        new_reading = Readings(systolic=current_user.systolic, diastolic=current_user.diastolic, notes=current_user.notes,user_id=current_user.id)
         db.session.add(new_reading)
         db.session.commit()
 

@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(80))
     join_date = db.Column(db.DateTime)
     picture = db.Column(db.String(20), nullable=False, default='default.jpg')
-    #reading = db.relationship('Readings', backref='patient', lazy='dynamic')
+    readings = db.relationship('Readings', backref='creator', lazy=True)
 
     def __repr__(self):
         # return '<User %r>' % self.username, self.email, self.picture
@@ -22,16 +22,15 @@ class User(db.Model, UserMixin):
 class Readings(db.Model):
     __tablename__ = 'readings'
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    #date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     systolic = db.Column(db.Integer())
     diastolic = db.Column(db.Integer())
     notes = db.Column(db.String(250))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = relationship(User)
-
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"Readings('{self.date}', '{self.systolic}', '{self.diastolic}', '{self.notes}')"
+        return f"Readings('{self.date_posted}', '{self.systolic}', '{self.diastolic}', '{self.notes}')"
 
 class Doctor(db.Model):
     __tablename__ = 'doctor'
