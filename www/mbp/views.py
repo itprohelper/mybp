@@ -57,7 +57,7 @@ def signup():
         db.session.commit()
 
         flash("New account created successfully")
-
+        return redirect(url_for('login'))
     return render_template('signup.html', form=form)
 
 
@@ -67,7 +67,7 @@ def dashboard():
     form = NewReading()
     #user_readings = Readings.query.all()
     current_user.systolic = form.systolic.data
-    
+
     #user_readings = Readings.query.filter_by(user_id=current_user).all()
 
     user_readings = db.session.query(Readings).filter_by(user_id=current_user.id).all()
