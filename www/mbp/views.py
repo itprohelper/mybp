@@ -24,18 +24,17 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:  #redirect logged in users to dashboard
+        return redirect(url_for('dashboard'))
     form = LoginForm()
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            if check_password_hash(user.password, form.password.data):
-                login_user(user, remember=form.remember.data)
-                return redirect(url_for('dashboard'))
-
-        flash("Invalid username of password")
-
-
+        if user and check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            return redirect(url_for('dashboard'))
+        else:
+            flash("Invalid username or password")
     return render_template('login.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -47,11 +46,11 @@ def signup():
         new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
 
         #porque?
-        user = User.query.filter_by(email=form.email.data).first()
-
-        if user:
-            flash('Email address already exists.')
-            return redirect(url_for('signup'))
+        # user = User.query.filter_by(email=form.email.data).first()
+        #
+        # if user:
+        #     flash('Email address already exists.')
+        #     return redirect(url_for('signup'))
 
         db.session.add(new_user)
         db.session.commit()
