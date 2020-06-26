@@ -88,19 +88,15 @@ Dashboard | My BP
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>2/21/2020</h4>
+              <h4>Jun 21, 2020 12:34PM</h4>
               <span class="text-muted">120/80</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Feb 21, 2020</h4>
+              <h4>Feb 21, 2020 9:12AM</h4>
               <span class="text-muted">135/85</span>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>2/21/20 at 10:15AM</h4>
-              <span class="text-muted">145/75</span>
-            </div>
+
           </div>
 
           <h2 class="sub-header">Readings history</h2>
@@ -108,7 +104,7 @@ Dashboard | My BP
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Day</th>
+                  <th>Date</th>
                   <th>Time</th>
                   <th>Systolic</th>
                   <th>Diastolic</th>
@@ -121,8 +117,8 @@ Dashboard | My BP
 {% for row in user_readings %}
 
                 <tr>
-                  <td>{{row.id}}</td>
-                  <td>{{row.date_posted}}</td>
+                  <td>{{ row.date_posted.strftime('%b %d, %Y') }}</td>
+                  <td>{{ row.date_posted.strftime('%I:%M %p') }}</td>
                   <td>{{row.systolic}}</td>
                   <td>{{row.diastolic}}</td>
                   <td>{{row.notes}}</td>
