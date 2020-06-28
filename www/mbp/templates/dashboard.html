@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 {% from 'bootstrap/wtf.html' import form_field %}
 {% import "bootstrap/wtf.html" as wtf %}
-<!-- {% from "_render_field.html" import render_field %} -->
+
 
 {% block title %}
 Dashboard | My BP
@@ -77,7 +77,7 @@ Dashboard | My BP
 
             {% endwith %}
             <!-- End Displays flash message -->
-          <h2 class="sub-header">Latest readings<h2>
+          <h2 class="sub-header">Latest Readings<h2>
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
@@ -99,7 +99,7 @@ Dashboard | My BP
 
           </div>
 
-          <h2 class="sub-header">Readings history</h2>
+          <h2 class="sub-header">Readings History</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -141,9 +141,9 @@ Dashboard | My BP
   <form action="{{url_for('editreading')}}" method="POST">
 
     <div class="form-group">
-      <label>Date</label>
+      <!-- <label>Date</label> -->
       <input type="hidden" name="id" value="{{row.id}}">
-      <input type="date" class="form-control" name="date" value="{{row.date}}">
+      <!-- <input type="date" class="form-control" name="date" value="{{row.date}}"> -->
       </div>
 
       <div class="form-group">
@@ -196,7 +196,7 @@ Dashboard | My BP
                     <form method="POST" action="{{url_for('newreading')}}">
 
                       {{ form.hidden_tag() }}
-                      {{ wtf.form_field(form.date) }}  <!--cambiar en auto populate fecha talvez-->
+
                       {{ wtf.form_field(form.systolic) }}
                       {{ wtf.form_field(form.diastolic) }}
                       {{ wtf.form_field(form.notes) }}

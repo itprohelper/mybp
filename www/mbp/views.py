@@ -89,7 +89,7 @@ def logout():
 def newreading():
     form = NewReading()
     if  form.validate_on_submit():
-        date = form.date.data
+        # date = form.date.data
         current_user.systolic = form.systolic.data
         current_user.diastolic = form.diastolic.data
         current_user.notes = form.notes.data
