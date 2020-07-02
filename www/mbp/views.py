@@ -1,8 +1,8 @@
 from mbp import app
 from mbp import db
 from mbp.models import User, Readings, Doctor, datetime
-from mbp.forms import LoginForm, SignupForm, NewReading, UpdateAccountForm
-from flask import render_template, redirect, url_for, request, flash
+from mbp.forms import LoginForm, SignupForm, NewReading, UpdateAccountForm, EditReading
+from flask import render_template, redirect, url_for, request, flash, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -104,20 +104,37 @@ def newreading():
     return render_template('newreading.html', form=form)
 
 
-@app.route('/editreading', methods = ['GET', 'POST'])
-def editreading():
-
-    if request.method == 'POST':
-        e_data = Readings.query.get(request.form.get('id'))
-
-        e_data.systolic = request.form['systolic']
-        e_data.diastolic = request.form['diastolic']
-        e_data.notes = request.form['notes']
-
+@app.route('/editreading/<id>', methods = ['GET', 'POST'])
+@login_required
+def editreading(id):
+    e_reading = Readings.query.get_or_404(id)
+    if e_reading.creator != current_user:
+        abort(403)
+    form = EditReading()
+    if form.validate_on_submit():
+        e_reading.systolic = form.systolic.data
+        e_reading.diastolic = form.diastolic.data
+        e_reading.notes = form.notes.data
         db.session.commit()
-        flash("Readings updated successfully")
-
+        flash('Your readings have been updated!')
         return redirect(url_for('dashboard'))
+    elif request.method == 'GET':
+        form.systolic.data = e_reading.systolic
+        form.diastolic.data = e_reading.diastolic
+        form.notes.data = e_reading.notes
+    return render_template('editreading.html', form=form, title= 'Edit Readings and Notes')
+
+    #if request.method == 'POST':
+    #     e_data = Readings.query.get(request.form.get('id'))
+    #
+    #     e_data.systolic = request.form['systolic']
+    #     e_data.diastolic = request.form['diastolic']
+    #     e_data.notes = request.form['notes']
+    #
+    #     db.session.commit()
+    #     flash("Readings updated successfully")
+    #
+    #     return redirect(url_for('dashboard'))
 
 @app.route('/deletereading/<id>', methods = ['GET', 'POST'])
 def deletereading(id):
