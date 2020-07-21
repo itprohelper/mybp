@@ -3,7 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship, validates, sessionmaker
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
-from sqlalchemy import create_engine, asc
+from sqlalchemy import create_engine, asc, desc
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'

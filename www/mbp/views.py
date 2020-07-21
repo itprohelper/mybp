@@ -1,6 +1,6 @@
 from mbp import app
 from mbp import db
-from mbp.models import User, Readings, Doctor, datetime
+from mbp.models import User, Readings, Doctor, datetime, desc, asc
 from mbp.forms import LoginForm, SignupForm, NewReading, UpdateAccountForm, EditReading
 from flask import render_template, redirect, url_for, request, flash, abort
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -67,15 +67,14 @@ def dashboard():
     #user_readings = Readings.query.all()
     current_user.systolic = form.systolic.data
 
-    #user_readings = Readings.query.filter_by(user_id=current_user).all()
-
     user_readings = db.session.query(Readings).filter_by(user_id=current_user.id).all()
 
-    # return render_template(
-    #     'dashboard.html', name=current_user.username, user_readings=user_readings, form=form)
-        #aqui puede ser para enseñar readings de un solo user a la vez
+    last_readings = db.session.query(Readings).filter_by(user_id=current_user.id).order_by(Readings.date_posted.desc()).limit(3).all()
+    #last_readings = Readings.query.order_by(desc(Readings.date_posted)).limit(3).all()
+    
     return render_template(
-        'dashboard.html', name=current_user.username, systolic=current_user.systolic, user_id=current_user.id, user_readings=user_readings, form=form)
+        'dashboard.html', name=current_user.username, systolic=current_user.systolic,
+          user_id=current_user.id, user_readings=user_readings, last_readings=last_readings,form=form)
 
 
 

@@ -77,16 +77,17 @@ Dashboard | My BP
 
             {% endwith %}
             <!-- End Displays flash message -->
-          <h2 class="sub-header">Latest Readings<h2>
 
+          <h2 class="sub-header">Latest Readings<h2>
+{% for last in last_readings %}
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
 
-              <h4>May 5, 2020 1:11AM</h4>
-              <span class="text-muted">125/89</span>
+              <h4>{{ last.date_posted.strftime('%b %d, %Y') }}</h4>
+              <span class="text-muted">{{last.systolic}}/{{last.diastolic}}</span>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
+            <!-- <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Jun 21, 2020 12:34PM</h4>
               <span class="text-muted">120/80</span>
@@ -95,10 +96,11 @@ Dashboard | My BP
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Feb 21, 2020 9:12AM</h4>
               <span class="text-muted">135/85</span>
-            </div>
+            </div> -->
 
           </div>
 
+{% endfor %}
           <h2 class="sub-header">Readings History</h2>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -122,7 +124,7 @@ Dashboard | My BP
                   <td>{{row.systolic}}</td>
                   <td>{{row.diastolic}}</td>
                   <td>{{row.notes}}</td>
-                  <td><a href="{{ url_for('editreading', id = row.id) }}" class="btn btn-warning btn-xs"></a>
+                  <td><a href="{{ url_for('editreading', id = row.id) }}" class="btn btn-warning btn-xs">Edit</a>
                   <!-- <td><a href="/editreading/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a> -->
                       <a href="/deletereading/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
                   </td>
