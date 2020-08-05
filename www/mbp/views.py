@@ -71,7 +71,7 @@ def dashboard():
 
     last_readings = db.session.query(Readings).filter_by(user_id=current_user.id).order_by(Readings.date_posted.desc()).limit(3).all()
     #last_readings = Readings.query.order_by(desc(Readings.date_posted)).limit(3).all()
-    
+    #arreglar la direccion como se presenta. poner en forma horizontal enves de una columna. ver el template bootstrap
     return render_template(
         'dashboard.html', name=current_user.username, systolic=current_user.systolic,
           user_id=current_user.id, user_readings=user_readings, last_readings=last_readings,form=form)
