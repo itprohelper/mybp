@@ -9,5 +9,14 @@ WORKDIR /opt/www
 # Install dependencies.
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
+# Set environment for flask
+ENV FLASK_APP=run.py
+
+# TODO como hacer para correr models.py y crear tables?
+#RUN python3 \
+#    && from mbp import db \
+#    && db.create_all() \
+#    && exit()
+
+#CMD flask run
 CMD python run.py
