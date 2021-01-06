@@ -1,6 +1,15 @@
 version: '2.2'
 services:
 
+  db:
+    restart: always
+    build: db/.
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecure
+    volumes:
+      - database:/var/lib/mysql
+
+
   www:
     restart: always
     build: www/.
@@ -11,13 +20,7 @@ services:
     depends_on:
       - db
 
-  db:
-    build: db/.
-    environment:
-      MYSQL_ROOT_PASSWORD: supersecure
-    volumes:
-      - database:/var/lib/mysql
-
+  
 
 volumes:
   database:            
