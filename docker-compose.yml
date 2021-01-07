@@ -1,4 +1,4 @@
-version: '2.2'
+version: '2.4'
 services:
 
   db:
@@ -8,19 +8,21 @@ services:
       MYSQL_ROOT_PASSWORD: supersecure
     volumes:
       - database:/var/lib/mysql
+   # healthcheck:
+    #  test: "exit 0"
 
 
   www:
     restart: always
     build: www/.
+    depends_on:
+        db:
+          condition: service_started
     ports:
       - "80:80"
-    links:
-      - db
-    depends_on:
-      - db
-
-  
+  #  links:
+  #    - db
+     
 
 volumes:
   database:            

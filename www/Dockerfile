@@ -9,8 +9,18 @@ WORKDIR /opt/www
 # Install dependencies.
 RUN pip install -r requirements.txt
 
-# Run python interpreter > from mbp import db > db.create_all()
-#RUN python createdb.py NO funciona aqui pero SI despues del build y up -d
-#Need to find a way to run this after the container is UP.
+# Set environment for flask
+ENV FLASK_APP=run.py
 
+# TODO como hacer para correr models.py y crear tables?
+#RUN python3 \
+#    && from mbp import db \
+#    && db.create_all() \
+#    && exit()
+
+#CMD flask run
+#RUN python createdb.py
 CMD python run.py
+
+
+
