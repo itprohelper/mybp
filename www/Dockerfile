@@ -19,8 +19,5 @@ ENV FLASK_APP=run.py
 #    && exit()
 
 #CMD flask run
-#RUN python createdb.py
+#RUN python createdb.py (ver ejemplo del Bret docker capitan para esperar que el DB empieze primero y despues correr esto)
 CMD python run.py
-
-
-
