@@ -1,5 +1,6 @@
 import os
 from flask import Flask, Markup
+from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, asc
 # from sqlalchemy.orm import sessionmaker
@@ -13,6 +14,6 @@ app.config.from_pyfile('config.py')
 
 # Configure MySQL connection.
 db = SQLAlchemy(app)
-
+moment = Moment(app)
 
 from mbp import views

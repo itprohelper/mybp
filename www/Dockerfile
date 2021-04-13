@@ -2,6 +2,8 @@
 FROM python:3-buster
 LABEL maintainer="ITPro Helper"
 
+RUN apt-get update && apt-get -y install ntp
+
 # Place app in container.
 COPY . /opt/www
 WORKDIR /opt/www

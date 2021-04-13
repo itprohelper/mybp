@@ -14,6 +14,10 @@
 
   <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.5.0.min.js') }}"></script>
   <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  {% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+  {% endblock %}
 
   </body>
 </html>
