@@ -9,11 +9,11 @@ from sqlalchemy.sql import text
 
 
 app = Flask(__name__)
+moment = Moment(app)
 
 app.config.from_pyfile('config.py')
 
 # Configure MySQL connection.
 db = SQLAlchemy(app)
-moment = Moment(app)
 
 from mbp import views
