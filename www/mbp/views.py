@@ -88,7 +88,7 @@ def logout():
 def newreading():
     form = NewReading()
     if  form.validate_on_submit():
-        # date = form.date.data
+        #current_time = datetime.datetime.now()
         current_user.systolic = form.systolic.data
         current_user.diastolic = form.diastolic.data
         current_user.notes = form.notes.data
@@ -163,11 +163,11 @@ def settings():
 
 @app.route('/reports')
 def reports():
-    return 'Reports here'
-    
-@app.route('/export')
-def export():
-    return 'Export here'
+    return 'Reports here and option to export and/or option to email report to doctor.'
+
+#@app.route('/export')
+#def export():
+#    return 'Export here'
 
 @app.route('/about')
 def about():

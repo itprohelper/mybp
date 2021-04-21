@@ -10,6 +10,10 @@ My Blood Pressure | Home
 <link rel="stylesheet" href="{{url_for('static', filename='css/starter-template.css')}}">
 <!-- <link rel="stylesheet" href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" > -->
 {% endblock %}
+{% block scripts %}
+  {{ super() }}
+  {{ moment.include_moment() }}
+{% endblock %}
 
 {% block content %}
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -37,8 +41,8 @@ My Blood Pressure | Home
 
       <div class="starter-template">
         <h1>Welcome to My Blood Pressure</h1>
-        <p class="lead">Track your bloody pressure and share it with your doctor.<br> This app is under construction.</p>
-         <p>The current date and time is: {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}.</p>
+        <p class="lead">Track your blood pressure and share it with your doctor.<br> This app is under construction.</p>
+         <p>The current date and time is:{{ moment().format('MMMM Do YYYY, h:mm:ss a') }} </p>
       </div>
 
     </div><!-- /.container -->

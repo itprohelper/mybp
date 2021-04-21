@@ -46,7 +46,7 @@ Dashboard | My BP
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="{{ url_for('reports') }}">Reports</a></li>
             <!--<li><a href="#">Analytics</a></li>-->
-            <li><a href="{{ url_for('export') }}">Export</a></li>
+
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -82,7 +82,7 @@ Dashboard | My BP
 {% for last in last_readings %}
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="MBP image placeholder">
 
               <h4>{{ last.date_posted.strftime('%b %d, %Y') }}</h4>
               <span class="text-muted">{{last.systolic}}/{{last.diastolic}}</span>
