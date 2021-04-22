@@ -64,7 +64,7 @@ def signup():
 @login_required
 def dashboard():
     form = NewReading()
-    #user_readings = Readings.query.all()
+    now = datetime.utcnow()
     current_user.systolic = form.systolic.data
 
     user_readings = db.session.query(Readings).filter_by(user_id=current_user.id).all()
@@ -73,7 +73,7 @@ def dashboard():
     #last_readings = Readings.query.order_by(desc(Readings.date_posted)).limit(3).all()
     #arreglar la direccion como se presenta. poner en forma horizontal enves de una columna. ver el template bootstrap
     return render_template(
-        'dashboard.html', name=current_user.username, systolic=current_user.systolic,
+        'dashboard.html', now=now,name=current_user.username, systolic=current_user.systolic,
           user_id=current_user.id, user_readings=user_readings, last_readings=last_readings,form=form)
 
 
@@ -86,8 +86,10 @@ def logout():
 
 @app.route('/newreading', methods=['GET', 'POST'])
 def newreading():
+
     form = NewReading()
     if  form.validate_on_submit():
+        now = datetime.utcnow()
         #current_time = datetime.datetime.now()
         current_user.systolic = form.systolic.data
         current_user.diastolic = form.diastolic.data

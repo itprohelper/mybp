@@ -13,6 +13,11 @@ Dashboard | My BP
 
 {% endblock %}
 
+{% block scripts %}
+  {{ super() }}
+  {{ moment.include_moment() }}
+{% endblock %}
+
 {% block content %}
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -119,8 +124,10 @@ Dashboard | My BP
 {% for row in user_readings %}
 
                 <tr>
-                  <td>{{ row.date_posted.strftime('%b %d, %Y') }}</td>
-                  <td>{{ row.date_posted.strftime('%I:%M %p') }}</td>
+                  <!--<td>{{ row.date_posted.strftime('%b %d, %Y') }}</td>-->
+                  <!--<td>{{ moment(row.date_posted).calendar() }}</td>-->
+                  <td>{{ moment(row.date_posted).format('MMMM Do YYYY') }}</td>
+                  <td>{{ moment(row.date_posted).format('h:mm a') }}</td>
                   <td>{{row.systolic}}</td>
                   <td>{{row.diastolic}}</td>
                   <td>{{row.notes}}</td>
