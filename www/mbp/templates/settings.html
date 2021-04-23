@@ -47,13 +47,12 @@ Settings | My BP
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="{{ url_for('reports') }}">Reports</a></li>
             <!--<li><a href="#">Analytics</a></li>-->
-          
+
           </ul>
 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Settings for {{ current_user.username }} <button type="button" class="btn btn-success" data-toggle="modal"
-            data-target="#mymodal" name="button">Save changes</button></h1>
+          <h1 class="page-header">Settings for {{ current_user.username }} </h1>
 
             {% with messages = get_flashed_messages() %}
 
@@ -116,17 +115,13 @@ Settings | My BP
   			{{ wtf.form_field(form.username) }}
   			{{ wtf.form_field(form.email) }}
   			{{ form.submit(class="btn btn-lg btn-primary btn-block") }}
-  			<!-- <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login" name="login">Sign Up</button> -->
-  			<!-- <small class="text-muted">
-  			Already registered? <a class="ml-2" href="{{ url_for('login') }}"> Log in</a>
-  			</small> -->
   		</form>
 
   </div>
 
 </div>
 
-
+<!--For registration -->
         <!-- <li>DOB</li>
         <li>City, Country</li>
 
@@ -138,9 +133,5 @@ Settings | My BP
         <li>Doctor email</li>
         <li>Email doctor your readings? checkbox aqui</li>
         </ul> -->
-
-
-
-
 <!-- /.container -->
 {% endblock %}

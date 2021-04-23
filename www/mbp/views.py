@@ -45,13 +45,6 @@ def signup():
         hashed_password = generate_password_hash(form.password.data, method='sha256')
         new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
 
-        #porque?
-        # user = User.query.filter_by(email=form.email.data).first()
-        #
-        # if user:
-        #     flash('Email address already exists.')
-        #     return redirect(url_for('signup'))
-
         db.session.add(new_user)
         db.session.commit()
 
@@ -70,8 +63,7 @@ def dashboard():
     user_readings = db.session.query(Readings).filter_by(user_id=current_user.id).all()
 
     last_readings = db.session.query(Readings).filter_by(user_id=current_user.id).order_by(Readings.date_posted.desc()).limit(3).all()
-    #last_readings = Readings.query.order_by(desc(Readings.date_posted)).limit(3).all()
-    #arreglar la direccion como se presenta. poner en forma horizontal enves de una columna. ver el template bootstrap
+
     return render_template(
         'dashboard.html', now=now,name=current_user.username, systolic=current_user.systolic,
           user_id=current_user.id, user_readings=user_readings, last_readings=last_readings,form=form)
@@ -125,17 +117,6 @@ def editreading(id):
         form.notes.data = e_reading.notes
     return render_template('editreading.html', form=form, title= 'Edit Readings and Notes')
 
-    #if request.method == 'POST':
-    #     e_data = Readings.query.get(request.form.get('id'))
-    #
-    #     e_data.systolic = request.form['systolic']
-    #     e_data.diastolic = request.form['diastolic']
-    #     e_data.notes = request.form['notes']
-    #
-    #     db.session.commit()
-    #     flash("Readings updated successfully")
-    #
-    #     return redirect(url_for('dashboard'))
 
 @app.route('/deletereading/<id>', methods = ['GET', 'POST'])
 def deletereading(id):

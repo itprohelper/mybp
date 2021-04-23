@@ -89,7 +89,7 @@ Dashboard | My BP
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="MBP image placeholder">
 
-              <h4>{{ last.date_posted.strftime('%b %d, %Y') }}</h4>
+              <h4>{{ last.date_posted.strftime('%b %d, %Y') }}</h4> <!--Include time using moment-->
               <span class="text-muted">{{last.systolic}}/{{last.diastolic}}</span>
             </div>
             <!-- <div class="col-xs-6 col-sm-3 placeholder">
@@ -132,7 +132,7 @@ Dashboard | My BP
                   <td>{{row.diastolic}}</td>
                   <td>{{row.notes}}</td>
                   <td><a href="{{ url_for('editreading', id = row.id) }}" class="btn btn-warning btn-xs">Edit</a>
-                  <!-- <td><a href="/editreading/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a> -->
+
                       <a href="/deletereading/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
                   </td>
 
@@ -148,39 +148,7 @@ Dashboard | My BP
           <h4 class="modal-title">Edit these Readings</h4>
       </div>
 
-<!-- <div class="modal-body">
-  <form action="{{ url_for('editreading', id = row.id) }}" method="POST">
-    {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.systolic) }}
-    {{ wtf.form_field(form.diastolic) }}
-    {{ wtf.form_field(form.notes) }}
-    {{ form.submit(class="btn btn-lg btn-primary btn-block") }} -->
 
-    <!-- <div class="form-group">
-      <label>Date</label>
-      <input type="hidden" name="id" value="{{row.id}}">
-      <input type="date" class="form-control" name="date" value="{{row.date}}">
-      </div>
-
-      <div class="form-group">
-        <label>Systolic:</label>
-        <input type="number" class="form-control" name="systolic" value="{{row.systolic}}">
-      </div>
-
-      <div class="form-group">
-        <label>Diastolic:</label>
-        <input type="number" class="form-control" name="diastolic" value="{{row.diastolic}}">
-      </div>
-
-      <div class="form-group">
-        <label>Notes:</label>
-        <input type="text" class="form-control" name="notes" value="{{row.notes}}">
-      </div>
-
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Update</button>
-      </div> -->
-    </form>
 
 </div>
 <div class="modal-footer">
