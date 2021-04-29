@@ -135,13 +135,17 @@ def settings():
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.doctorName = form.doctorName.data
+
+        new_doctor = Doctor(doctorName=current_user.doctorName,user_id=current_user.id)
+        db.session.add(new_doctor)
         db.session.commit()
         flash('Your account has been updated.', 'success')
         return redirect(url_for('settings'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-        
+
     picture = url_for('static', filename='profile_pics/' + current_user.picture)
     return render_template('settings.html', title= 'Account Settings', picture=picture, form=form)
 
