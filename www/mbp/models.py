@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
     join_date = db.Column(db.DateTime)
+    #doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=True)
     picture = db.Column(db.String(20), nullable=False, default='default.jpg')
     readings = db.relationship('Readings', backref='creator', lazy=True)
 
@@ -37,6 +38,9 @@ class Readings(db.Model):
 class Doctor(db.Model):
     __tablename__ = 'doctor'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), unique=False)
-    email = db.Column(db.String(50), unique=False)
+    doctorName = db.Column(db.String(150), unique=False)
+    doctorEmail = db.Column(db.String(50), unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Doctor('{self.name}', '{self.email}')"
