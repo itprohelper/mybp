@@ -3,7 +3,7 @@ from flask_login import current_user
 from wtforms import StringField, PasswordField, BooleanField, IntegerField, SubmitField, DateField, TextAreaField, DecimalField
 from wtforms.validators import InputRequired, Email, Length, NumberRange, EqualTo, DataRequired, ValidationError
 from wtforms.fields.html5 import DateField
-from mbp.models import User
+from mbp.models import User, Readings, Doctor
 
 
 class LoginForm(FlaskForm):

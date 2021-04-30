@@ -58,7 +58,7 @@ def signup():
 def dashboard():
     form = NewReading()
     now = datetime.utcnow()
-    current_user.systolic = form.systolic.data
+    current_user.systolic = form.systolic.data #porque esta linea?
 
     user_readings = db.session.query(Readings).filter_by(user_id=current_user.id).all()
 
@@ -146,6 +146,7 @@ def settings():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
+
 
     picture = url_for('static', filename='profile_pics/' + current_user.picture)
     return render_template('settings.html', title= 'Account Settings', picture=picture, form=form)
