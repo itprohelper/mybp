@@ -44,10 +44,10 @@ class EditReading(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-    doctorName = StringField('Doctor name', validators=[InputRequired(), Length(min=4, max=15)])
-    doctorEmail = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    username = StringField('Your Username', validators=[InputRequired(), Length(min=4, max=15)])
+    email = StringField('Your Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    doctorName = StringField('Doctor Name', validators=[InputRequired(), Length(min=4, max=15)])
+    doctorEmail = StringField('Doctor Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
