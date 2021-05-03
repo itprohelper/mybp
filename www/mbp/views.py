@@ -128,7 +128,7 @@ def deletereading(id):
     return redirect(url_for('dashboard'))
 
 
-@app.route('/settings', methods=['GET', 'POST'])
+@app.route('/settings', methods=['GET', 'POST']) #hacer un query para ver los doctores del usuario?
 @login_required
 def settings():
     form = UpdateAccountForm()
@@ -153,7 +153,7 @@ def settings():
 
 @app.route('/reports')
 def reports():
-    return 'Reports here and option to export and/or option to email report to doctor.'
+    return render_template('reports.html', title= 'Reports')
 
 #@app.route('/export')
 #def export():
