@@ -18,6 +18,8 @@ services:
     depends_on:
         db:
           condition: service_started
+    volumes:
+      - ./www:/opt/www
     ports:
       - "80:80"
   #  links:
@@ -26,4 +28,4 @@ services:
 
 volumes:
   database:            
-
+  flask_code:
