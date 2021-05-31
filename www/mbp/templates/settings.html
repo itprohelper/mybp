@@ -4,7 +4,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-Settings | My Blood Pressure
+Profile Settings | My Blood Pressure
 {% endblock %}
 
 {% block styles %}
@@ -52,7 +52,7 @@ Settings | My Blood Pressure
 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Settings for {{ current_user.username }} </h1>
+          <h1 class="page-header">Profile Settings for {{ current_user.username }} </h1>
 
             {% with messages = get_flashed_messages() %}
 
@@ -98,8 +98,9 @@ Settings | My Blood Pressure
   			{{ form.hidden_tag() }}
   			{{ wtf.form_field(form.username) }}
   			{{ wtf.form_field(form.email) }}
-        {{ wtf.form_field(form.doctorName) }}
-        {{ wtf.form_field(form.doctorEmail) }}
+        <h2 class="form-signin-heading">Your Doctor's Info (Optional)</h2>
+        {{ wtf.form_field(form.doctor_name) }}
+        {{ wtf.form_field(form.doctor_email) }}
   			{{ form.submit(class="btn btn-lg btn-primary btn-block") }}
   		</form>
 

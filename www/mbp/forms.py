@@ -36,6 +36,11 @@ class NewReading(FlaskForm):
     notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=120)])
     submit = SubmitField('Add Reading')
 
+class NewDoctor(FlaskForm):
+    doctor_name = StringField('Doctor Name', validators=[Length(min=0, max=15)]) #Need to validate opcional y que no haga un entry al DB if blank
+    doctor_email = StringField('Doctor Email', validators=[Length(max=50)]) #Need to validate opcional y que no haga un entry al DB if blank
+    submit = SubmitField('Add Doctor')
+
 class EditReading(FlaskForm):
     systolic = IntegerField('Systolic', validators=[InputRequired(),NumberRange(min=60, max=160, message="This value must be between 60 to 160.")])
     diastolic = IntegerField('Diastolic', validators=[InputRequired(), NumberRange(min=50, max=140, message="This value must be between 50 to 140")])
@@ -46,8 +51,8 @@ class EditReading(FlaskForm):
 class UpdateAccountForm(FlaskForm):
     username = StringField('Your Username', validators=[InputRequired(), Length(min=4, max=15)])
     email = StringField('Your Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-    doctorName = StringField('Doctor Name', validators=[InputRequired(), Length(min=4, max=15)])
-    doctorEmail = StringField('Doctor Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    doctor_name = StringField('Doctor Name', validators=[Length(min=0, max=15)]) #Need to validate opcional y que no haga un entry al DB if blank
+    doctor_email = StringField('Doctor Email', validators=[Length(max=50)]) #Need to validate opcional y que no haga un entry al DB if blank
     submit = SubmitField('Update')
 
     def validate_username(self, username):

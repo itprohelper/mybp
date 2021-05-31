@@ -2,7 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-My Blood Pressure | Login
+My Blood Pressure | Add a New Doctor
 {% endblock %}
 
 {% block styles %}
@@ -29,16 +29,16 @@ My Blood Pressure | Login
 	{% endif %}
 
 	{% endwith %}
-		<form class="form-signin" method="POST" action="/login">
-			<h2 class="form-signin-heading">Please Log in</h2>
-			{{ form.hidden_tag() }}
-			{{ wtf.form_field(form.username) }}
-			{{ wtf.form_field(form.password) }}
-			{{ wtf.form_field(form.remember) }}
-			{{ form.submit(class="btn btn-lg btn-primary btn-block") }}
-			<!-- <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login" name="login">Log In</button> -->
+		<form class="form-signin" method="POST" action="/newreading">
+			<h2 class="form-signin-heading">Add a New Doctor</h2>
+      {{ form.hidden_tag() }}
+      <!--cambiar en auto populate fecha talvez-->
+      {{ wtf.form_field(form.doctor_name) }}
+      {{ wtf.form_field(form.doctor_email) }}
+      {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
+
 			<small class="text-muted">
-			Not registered yet?<a class="ml-2" href="{{ url_for('signup') }}"> Sign Up</a>
+			Go back to dashboard?<a class="ml-2" href="{{ url_for('dashboard') }}"> Your Dashboard</a>
 			</small>
 		</form>
 

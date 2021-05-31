@@ -1,7 +1,7 @@
 from mbp import app
 from mbp import db
 from mbp.models import User, Readings, Doctor, datetime, desc, asc
-from mbp.forms import LoginForm, SignupForm, NewReading, UpdateAccountForm, EditReading
+from mbp.forms import LoginForm, SignupForm, NewReading, UpdateAccountForm, EditReading, NewDoctor
 from flask import render_template, redirect, url_for, request, flash, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
@@ -81,7 +81,7 @@ def newreading():
 
     form = NewReading()
     if  form.validate_on_submit():
-        now = datetime.utcnow()
+        now = datetime.utcnow() #talvez no sea necesario
         #current_time = datetime.datetime.now()
         current_user.systolic = form.systolic.data
         current_user.diastolic = form.diastolic.data
@@ -127,18 +127,37 @@ def deletereading(id):
 
     return redirect(url_for('dashboard'))
 
+@app.route('/newdoctor', methods=['GET', 'POST'])
+def newdoctor():
+
+    form = NewDoctor()
+    if  form.validate_on_submit():
+        current_user.doctor_name = form.doctor_name.data
+        current_user.doctor_email = form.doctor_email.data
+
+        new_doctor = Doctor(doctor_name=current_user.doctor_name,doctor_email=current_user.doctor_email)
+        db.session.add(new_doctor)
+        db.session.commit()
+
+        flash("New doctor created successfully")
+
+        return redirect(url_for('settings'))
+    return render_template('newdoctor.html', form=form)
+
 
 @app.route('/settings', methods=['GET', 'POST']) #hacer un query para ver los doctores del usuario?
 @login_required
 def settings():
+    dname = Doctor.query.all()
+
     form = UpdateAccountForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
-        current_user.doctorName = form.doctorName.data
-        current_user.doctorEmail = form.doctorEmail.data
-
-        new_doctor = Doctor(doctorName=current_user.doctorName,doctorEmail=current_user.doctorEmail,user_id=current_user.id)
+        current_user.doctor_name = form.doctor_name.data
+        current_user.doctor_email = form.doctor_email.data
+        new_doctor = Doctor(doctor_name=current_user.doctor_name,doctor_email=current_user.doctor_email,user_id=current_user.id)
+        #new_doctor = Doctor(doctor_name=current_user.doctor_name,doctor_email=current_user.doctor_email,user_id=current_user.id)
         db.session.add(new_doctor)
         db.session.commit()
         flash('Your account has been updated.', 'success')
@@ -146,11 +165,11 @@ def settings():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-        form.doctorName.data = current_user.doctorName
-
+        form.doctor_name.data = current_user
+        form.doctor_email.data = Doctor.doctor_email
 
     picture = url_for('static', filename='profile_pics/' + current_user.picture)
-    return render_template('settings.html', title= 'Account Settings', picture=picture, form=form)
+    return render_template('settings.html', title= 'Profile Account Settings', picture=picture, form=form)
 
 @app.route('/reports')
 def reports():
