@@ -1,8 +1,8 @@
 # A MySQL container.
-FROM mysql:5.7
+FROM mariadb:10.5
 LABEL maintainer="ITPro Helper"
 
-RUN apt-get update && apt-get install -y python3
+RUN apt update && apt install -y python3
 
 # No ve el resto de los files para correr flask
 #ADD createdb.py /

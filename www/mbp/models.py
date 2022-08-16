@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(150))
+    password = db.Column(db.String(80))
     join_date = db.Column(db.DateTime)
     #doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=True)
     picture = db.Column(db.String(20), nullable=False, default='default.jpg')
@@ -41,7 +41,7 @@ class Doctor(db.Model):
     __tablename__ = 'doctor'
     id = db.Column(db.Integer, primary_key=True)
     doctor_name = db.Column(db.String(150), unique=False)
-    doctor_email = db.Column(db.String(50), unique=False)
+    doctor_email = db.Column(db.String(50), unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):

@@ -1,8 +1,8 @@
 # A simple Flask app container.
-FROM python:3-buster
-LABEL maintainer="ITPro Helper"
+FROM python:3.9-buster
+LABEL maintainer="ITProHelper.com"
 
-RUN apt-get update && apt-get -y install ntp
+RUN apt-get update && apt-get -y install ntp 
 
 # Place app in container.
 COPY . /opt/www

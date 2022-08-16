@@ -148,7 +148,7 @@ def newdoctor():
 @app.route('/settings', methods=['GET', 'POST']) #hacer un query para ver los doctores del usuario?
 @login_required
 def settings():
-    dname = Doctor.query.all()
+    #dname = Doctor.query.all()
 
     form = UpdateAccountForm()
     if form.validate_on_submit():

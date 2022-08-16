@@ -12,7 +12,7 @@
 Most webservices and sites require some sort of database to store data, so we need to create not one but _two_ Docker containers, and link them together:
 
   1. Flask container (with Python).
-  2. MySQL container
+  2. MariaDB container
 
 I'm using Docker's `docker-compose` for this project.
 
