@@ -1,4 +1,4 @@
-# Flask App with MySQL Database | This is work in progress
+# Flask App with MariaDB Database | This is work in progress
 
 ## Quick Notes
 
