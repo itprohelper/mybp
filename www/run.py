@@ -42,7 +42,7 @@ class Doctor(Base):
     __tablename__ = 'doctor'
     id = db.Column(db.Integer, primary_key=True)
     doctor_name = db.Column(db.String(150), unique=False)
-    email = db.Column(db.String(50), unique=False)
+    doctor_email = db.Column(db.String(50), unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 

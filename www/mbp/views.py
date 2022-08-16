@@ -101,7 +101,7 @@ def newreading():
 @login_required
 def editreading(id):
     e_reading = Readings.query.get_or_404(id)
-    if e_reading.creator != current_user:
+    if e_reading.user_id != current_user:
         abort(403)
     form = EditReading()
     if form.validate_on_submit():
@@ -145,10 +145,11 @@ def newdoctor():
     return render_template('newdoctor.html', form=form)
 
 
-@app.route('/settings', methods=['GET', 'POST']) #hacer un query para ver los doctores del usuario?
+@app.route('/settings', methods=['GET', 'POST']) 
+#hacer un query para ver los doctores del usuario? mejor usar el id del usuarion en este route. /settings/<int:user_id>
 @login_required
 def settings():
-    #dname = Doctor.query.all()
+    doctors = Doctor.query.all()
 
     form = UpdateAccountForm()
     if form.validate_on_submit():
@@ -165,7 +166,7 @@ def settings():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-        form.doctor_name.data = current_user
+        form.doctor_name.data = Doctor.doctor_name
         form.doctor_email.data = Doctor.doctor_email
 
     picture = url_for('static', filename='profile_pics/' + current_user.picture)

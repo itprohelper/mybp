@@ -27,5 +27,5 @@ services:
      
 
 volumes:
-  database:            
+  database:
   flask_code:
