@@ -10,4 +10,4 @@ docker compose up
 
 ## More details are coming soon.
 I also wrote some brief tutorials on different subjects hoping to help somebody.
-See them on my site [ITPro Helper](https://itproheper.com}
+See them on my site [ITPro Helper](https://itproheper.com)
