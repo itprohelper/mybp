@@ -1,6 +1,5 @@
 # Flask app in order to help users track their blood pressure readings.
-The purpose of this repo is to have this image as a starting point for developing a Flask app.
-
+This repo uses my [Flask base repo](https://github.com/itprohelper/flask_base)
 ## How to run this container?
 Using your terminal go to the directory where you cloned this repo and then start the containers using docker compose:
 
