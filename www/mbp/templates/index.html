@@ -1,27 +1,14 @@
-<<<<<<< HEAD
 {% extends 'base.html' %}
 
+<title>Track your Blood Pressure | Home</title>
 
-{% block title %}
-<title>La Base</title>
-{% endblock %}
-
-{% block content %}
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-=======
-{% extends "bootstrap/base.html" %}
-
-
-{% block title %}
-My Blood Pressure | Home
-{% endblock %}
-
+<!--{% extends "bootstrap/base.html" %}-->
 {% block styles %}
 {{super()}}
 <link rel="stylesheet" href="{{url_for('static', filename='css/starter-template.css')}}">
 <!-- <link rel="stylesheet" href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" > -->
 {% endblock %}
+
 {% block scripts %}
   {{ super() }}
   {{ moment.include_moment() }}
@@ -58,5 +45,5 @@ My Blood Pressure | Home
       </div>
 
     </div><!-- /.container -->
->>>>>>> 0c7317aedff658529f31f3b862c89a64dd373a01
+
 {% endblock %}

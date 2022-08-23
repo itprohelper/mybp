@@ -1,44 +1,21 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
-<html>
-<head>
-{% block title %}
-<title>La Base</title>
-{% endblock %}
-</head>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+<script src=""></script>
 <body>
 
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
 
-{% block content %}
-{% endblock %}
+
+<div class="">
+ <h1>This is a Heading</h1>
+ <p>This is a paragraph.</p>
+ <p>This is another paragraph.</p>
+</div>
 
 </body>
-=======
-<html>
-<head>
-  <link href="{{url_for('static', filename= 'css/bootstrap.min.css')}}" rel="stylesheet"/>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-  <link rel="stylesheet" href="{{url_for('static', filename='css/starter-template.css')}}">
-  <meta charset="utf-8">
-  <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.5.0.min.js') }}"></script>
-  <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js') }}"></script>
-
-
-<title>{% block title %}{% endblock %}</title>
-{% block scripts %}
-  {{ super() }}
-  {{ moment.include_moment() }}
-{% endblock %}
-</head>
-
-<body>
-
-  {% block body %}  {% endblock %}
-
-
-
-  </body>
->>>>>>> 0c7317aedff658529f31f3b862c89a64dd373a01
-</html>
+</html> 
