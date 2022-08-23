@@ -1,0 +1,26 @@
+services:
+
+  db:
+    restart: always
+    build: db/.
+    environment:
+      MARIADB_ROOT_PASSWORD: supersecure
+    volumes: #averiguar las diferencias y ventajas comprado con el volume de abajo ./www:/opt/www
+      - database:/var/lib/mysql
+
+  www:
+    restart: always
+    build: www/.
+    depends_on:
+        db:
+          condition: service_started
+    volumes:
+      - ./www:/opt/www
+    environment:
+      FLASK_DEBUG: 1
+    ports:
+      - "8000:5000"
+     
+
+volumes:
+  database:
