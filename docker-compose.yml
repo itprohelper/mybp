@@ -20,7 +20,7 @@ services:
       FLASK_DEBUG: 1
     ports:
       - "8000:5000"
-     
+
 
 volumes:
   database:

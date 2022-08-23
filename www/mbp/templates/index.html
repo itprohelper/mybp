@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %}
 
 
@@ -8,4 +9,54 @@
 {% block content %}
 <h1>This is a Heading</h1>
 <p>This is a paragraph.</p>
+=======
+{% extends "bootstrap/base.html" %}
+
+
+{% block title %}
+My Blood Pressure | Home
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/starter-template.css')}}">
+<!-- <link rel="stylesheet" href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" > -->
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  {{ moment.include_moment() }}
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">MY BP</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Welcome to My Blood Pressure</h1>
+        <p class="lead">Track your blood pressure and share it with your doctor.<br> This app is under construction.</p>
+         <p>The current date and time is: {{ moment().format('MMMM Do YYYY, h:mm a') }} </p>
+      </div>
+
+    </div><!-- /.container -->
+>>>>>>> 0c7317aedff658529f31f3b862c89a64dd373a01
 {% endblock %}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,4 +15,30 @@
 {% endblock %}
 
 </body>
+=======
+<html>
+<head>
+  <link href="{{url_for('static', filename= 'css/bootstrap.min.css')}}" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/starter-template.css')}}">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.5.0.min.js') }}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+
+<title>{% block title %}{% endblock %}</title>
+{% block scripts %}
+  {{ super() }}
+  {{ moment.include_moment() }}
+{% endblock %}
+</head>
+
+<body>
+
+  {% block body %}  {% endblock %}
+
+
+
+  </body>
+>>>>>>> 0c7317aedff658529f31f3b862c89a64dd373a01
 </html>
