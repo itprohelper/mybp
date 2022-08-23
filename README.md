@@ -1,4 +1,4 @@
-# Flask base to start a local development environment fast
+# Flask app in order to help users track their blood pressure readings.
 The purpose of this repo is to have this image as a starting point for developing a Flask app.
 
 ## How to run this container?
