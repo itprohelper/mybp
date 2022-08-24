@@ -1,13 +1,31 @@
-
-from flask import render_template, jsonify, request
+from turtle import title
+from flask import render_template, jsonify, redirect, url_for
 import json
 from mbp import app, db
-#from www.forms import CreateUser, UpdateUser
+
+readings = [
+    {
+        'user': 'Francisco Ulloa',
+        'sys': '122',
+        'dia': '77',
+        'notes': 'Oyendo perico ripiao',
+        'date': 'Aug 4, 2022 at 4:07PM'
+    },
+    {
+        'user': 'Pakar Kuruturuntun',
+        'sys': '140',
+        'dia': '90',
+        'notes': 'Oyendo Tika Tike Tuka',
+        'date': 'Aug 5, 2022 at 6:23PM'
+    }
+]
+
 
 @app.route('/')
-def hello_world():
-    return render_template('index.html')
+@app.route('/home')
+def home():
+    return render_template('index.html', readings=readings)
 
-@app.route('/users')
-def otro_hello_world():
-    return 'Otro HOla!'
+@app.route('/about')
+def about():
+    return render_template('about.html', title='About')
