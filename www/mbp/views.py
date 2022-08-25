@@ -1,4 +1,4 @@
-from turtle import title
+#from turtle import title
 from flask import render_template, jsonify, redirect, url_for
 import json
 from mbp import app, db
@@ -29,3 +29,4 @@ def home():
 @app.route('/about')
 def about():
     return render_template('about.html', title='About')
+

@@ -5,6 +5,7 @@ LABEL maintainer="ITProHelper.com"
 #Set the working directory
 WORKDIR /opt/www
 
+# We copy the Flask requirements in a separate build step. This file seldom changes.
 COPY requirements.txt requirements.txt
 
 #Set environment for flask
