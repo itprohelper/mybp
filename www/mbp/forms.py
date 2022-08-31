@@ -3,16 +3,17 @@ from flask_login import current_user
 from wtforms import StringField, PasswordField, BooleanField, IntegerField, SubmitField, DateField, TextAreaField, DecimalField
 from wtforms.validators import InputRequired, Email, Length, NumberRange, EqualTo, DataRequired, ValidationError
 from wtforms.fields import DateField
-from mbp.models import User, Readings, Doctor
+#from mbp.models import User, Readings, Doctor
 
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    email = StringField('email', validators=[DataRequired(), Email()])
+    #username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     submit = SubmitField('Submit')
     remember = BooleanField('Remember me')
 
-class SignupForm(FlaskForm):
+class RegistrationForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), Length(min=4, max=15)])
     email = StringField('email', validators=[DataRequired(), Email(message='Invalid email'), Length(max=50)])
     password = PasswordField('password', validators=[DataRequired(), Length(min=8, max=80)])
