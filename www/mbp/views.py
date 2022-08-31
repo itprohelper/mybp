@@ -1,4 +1,4 @@
-from flask import render_template, jsonify, redirect, url_for
+from flask import render_template, jsonify, redirect, url_for, flash, redirect
 import json
 from mbp import app, db
 from mbp.forms import RegistrationForm, LoginForm
@@ -29,6 +29,9 @@ def home():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success') #Display flash confirmation message.
+        return redirect(url_for('home'))    #When the form is a success redirect to home page.
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/login')
