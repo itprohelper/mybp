@@ -1,47 +1,62 @@
-{% extends "bootstrap/base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block title %}
-My Blood Pressure | Login
-{% endblock %}
-
-{% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('static', filename='css/signin.css')}}">
-{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
 <div class="container">
-	{% with messages = get_flashed_messages() %}
 
-	{% if messages %}
-
-	{% for message in messages %}
-
-	<div class="alert alert-success alert-dismissable" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="close">
-			<span aria-hidden="true">X</span>
-		</button>
-		{{message}}
-	</div>
-	{% endfor %}
-
-	{% endif %}
-
-	{% endwith %}
-		<form class="form-signin" method="POST" action="/login">
-			<h2 class="form-signin-heading">Please Log in</h2>
+		<form class="form-signin" method="POST" action="/register">
+			<h2 class="form-signin-heading">Log In</h2>
 			{{ form.hidden_tag() }}
-			{{ wtf.form_field(form.username) }}
-			{{ wtf.form_field(form.password) }}
-			{{ wtf.form_field(form.remember) }}
-			{{ form.submit(class="btn btn-lg btn-primary btn-block") }}
-			<!-- <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login" name="login">Log In</button> -->
-			<small class="text-muted">
-			Not registered yet?<a class="ml-2" href="{{ url_for('signup') }}"> Sign Up</a>
-			</small>
+			<fieldset class="form-group">
+				<!--<legend class="border-bottom mb-4">Join Today</legend>-->
+
+
+				<div class="form-group">
+						{{ form.email.label(class="form-control-label") }}
+
+						{% if form.email.errors %}
+								{{ form.email(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+										{% for error in form.email.errors %}
+												<span>{{ error }}</span>
+										{% endfor %}
+								</div>
+						{% else %}
+								{{ form.email(class="form-control form-control-lg") }}
+						{% endif %}
+				</div>
+
+				<div class="form-group">
+						{{ form.password.label(class="form-control-label") }}
+						{% if form.password.errors %}
+								{{ form.password(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+										{% for error in form.password.errors %}
+												<span>{{ error }}</span>
+										{% endfor %}
+								</div>
+						{% else %}
+								{{ form.password(class="form-control form-control-lg") }}
+						{% endif %}
+				</div>
+
+			</fieldset>
+			<div class="form-check"> <!--Checkbox to remember me-->
+					{{ form.remember(class="form-check-input") }}
+					{{ form.remember.label(class="form-check-label") }}
+			</div>
+
+			<div class="form-group">
+					{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+				<small class="text-muted ml-2">
+						<a href="#">Forgot Password?</a>
+				</small>
 		</form>
 
-
-	</div>
-{% endblock %}
+			<div class="border-top pt-3">
+			<small class="text-muted">
+			Need An Account? <a class="ml-2" href="{{ url_for('register') }}"> Register Now</a>
+			</small>
+			</div>
+</div>
+{% endblock content %}
