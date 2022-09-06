@@ -1,5 +1,5 @@
 database/
-__pycache__
+__pycache__/
 dashboard-ori.html
 createdb.py
 config.py
