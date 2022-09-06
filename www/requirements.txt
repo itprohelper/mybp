@@ -3,7 +3,6 @@ flask-sqlalchemy
 flask-migrate
 mysqlclient
 flask-wtf
-flask-bootstrap
 flask-login
 email_validator
 flask-moment
