@@ -17,7 +17,7 @@ services:
     volumes:
       - ./www:/opt/www
     environment:
-      FLASK_DEBUG: 1
+      FLASK_DEBUG: 1 #have the app run in debug mode.
     ports:
       - "8000:5000"
 

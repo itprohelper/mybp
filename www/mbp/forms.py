@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, BooleanField, IntegerField, SubmitField, DateField, TextAreaField, DecimalField
+from wtforms import StringField, PasswordField, BooleanField, IntegerField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired, Email, Length, NumberRange, EqualTo, DataRequired, ValidationError
-from wtforms.fields import DateField
+#from wtforms.fields import DateField
 #from mbp.models import User, Readings, Doctor
 
 

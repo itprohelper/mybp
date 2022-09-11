@@ -1,6 +1,7 @@
-from flask import render_template, jsonify, redirect, url_for, flash, redirect
+from flask import render_template, jsonify, redirect, flash, url_for
 import json
-from mbp import app, db
+from mbp import app
+from mbp.models import User, Reading
 from mbp.forms import RegistrationForm, LoginForm
 
 readings = [
