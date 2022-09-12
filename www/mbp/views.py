@@ -1,9 +1,9 @@
-from flask import render_template, jsonify, redirect, flash, url_for
+from flask import render_template, jsonify, redirect, flash, url_for, request
 import json
 from mbp import app, db, bcrypt
 from mbp.models import User, Reading
 from mbp.forms import RegistrationForm, LoginForm
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 readings = [
     {
@@ -51,7 +51,8 @@ def login():
         user = User.query.filter_by(email=form.email.data).first() #query database for user entered in form.
         if user and bcrypt.check_password_hash(user.password, form.password.data): #check if user exists and check hashed password and what the user entered in the form.
             login_user(user, remember=form.remember.data) #login the user if it exist and password is correct also pass in the remember me checkbox.
-            return redirect(url_for('home')) #send user back to home page if all good.
+            next_page = request.args.get('next') #no estoy claro porque todavia.
+            return redirect(next_page) if next_page else redirect(url_for('home')) #send user back to home page if all good.
         else:
             flash('Login no good. Please check email and password', 'danger') #then user will be redirected to login page.
     return render_template('login.html', title='Login', form=form)
@@ -60,6 +61,11 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('account.html', title='Account')
 
 @app.route('/about')
 def about():
