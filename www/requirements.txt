@@ -7,3 +7,4 @@ flask-login
 email_validator
 flask-moment
 Werkzeug
+flask-bcrypt

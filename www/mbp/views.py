@@ -1,8 +1,9 @@
 from flask import render_template, jsonify, redirect, flash, url_for
 import json
-from mbp import app
+from mbp import app, db, bcrypt
 from mbp.models import User, Reading
 from mbp.forms import RegistrationForm, LoginForm
+from flask_login import login_user, current_user, logout_user
 
 readings = [
     {
@@ -29,23 +30,36 @@ def home():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home')) #check if the current user if logged in and redirect to home page.
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success') #Display flash confirmation message.
-        return redirect(url_for('home'))    #When the form is a success redirect to home page.
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user) #Add user to database
+        db.session.commit() #Commit changes to database
+        flash('Your account has been created!', 'success') #Display flash confirmation message.
+        return redirect(url_for('login')) #When the form is a success redirect to login page.
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home')) #check if the current user if logged in and redirect to home page.
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
-            flash('You have been logged in!', 'success')
-            return redirect(url_for('home')) #If the above matches return to Home page showing the flash message.
-        else: #When not a success login do this.
-            flash('Login no good. Please check username and password', 'danger') #It will return to login page displaying this message.
+        user = User.query.filter_by(email=form.email.data).first() #query database for user entered in form.
+        if user and bcrypt.check_password_hash(user.password, form.password.data): #check if user exists and check hashed password and what the user entered in the form.
+            login_user(user, remember=form.remember.data) #login the user if it exist and password is correct also pass in the remember me checkbox.
+            return redirect(url_for('home')) #send user back to home page if all good.
+        else:
+            flash('Login no good. Please check email and password', 'danger') #then user will be redirected to login page.
     return render_template('login.html', title='Login', form=form)
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 @app.route('/about')
 def about():
