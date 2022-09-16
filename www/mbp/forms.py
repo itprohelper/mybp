@@ -26,7 +26,7 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(username=username.data).first()
         if user: #Validates if user exist and show the below error
             raise ValidationError('That username is taken. Please choose a different one')
-         
+
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user: #Validates if email exist and show the below error
@@ -67,23 +67,3 @@ class EditReading(FlaskForm):
     diastolic = IntegerField('Diastolic', validators=[InputRequired(), NumberRange(min=50, max=140, message="This value must be between 50 to 140")])
     notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=120)])
     submit = SubmitField('Edit Reading')
-
-
-class UpdateAccountForm(FlaskForm):
-    username = StringField('Your Username', validators=[InputRequired(), Length(min=4, max=15)])
-    email = StringField('Your Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-    doctor_name = StringField('Doctor Name', validators=[Length(min=0, max=15)]) #Need to validate opcional y que no haga un entry al DB if blank
-    doctor_email = StringField('Doctor Email', validators=[Length(max=50)]) #Need to validate opcional y que no haga un entry al DB if blank
-    submit = SubmitField('Update')
-
-    def validate_username(self, username):
-        if username.data != current_user.username:
-            user = User.query.filter_by(username=username.data).first()
-            if user:
-                raise ValidationError('That username is taken. Please choose a different one')
-
-    def validate_email(self, email):
-        if email.data != current_user.email:
-            user = User.query.filter_by(email=email.data).first()
-            if user:
-                raise ValidationError('That email is taken. Please choose a different one')

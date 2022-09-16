@@ -1,3 +1,5 @@
+import os
+import secrets
 from crypt import methods
 from flask import render_template, jsonify, redirect, flash, url_for, request
 import json
