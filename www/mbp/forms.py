@@ -52,7 +52,7 @@ class UpdateAccountForm(FlaskForm):
 
 class NewReadingForm(FlaskForm):
     #date = DateField('Date', format='%Y-%m-%d', validators=[InputRequired()]) #difficult to enter day without from wtforms.fields.html5 import DateField
-    systolic = IntegerField('Systolic', validators=[DataRequired(),NumberRange(min=50, max=160, message="This value must be between 50 to 160.")])
+    systolic = IntegerField('Systolic', validators=[DataRequired(), NumberRange(min=50, max=160, message="This value must be between 50 to 160.")])
     diastolic = IntegerField('Diastolic', validators=[InputRequired(), NumberRange(min=50, max=160, message="This value must be between 50 to 160")])
     notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=200)])
     submit = SubmitField('Add Reading')
