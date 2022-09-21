@@ -8,3 +8,4 @@ email_validator
 flask-moment
 Werkzeug
 flask-bcrypt
+Pillow
