@@ -6,7 +6,7 @@ from flask import render_template, jsonify, redirect, flash, url_for, request
 import json
 from mbp import app, db, bcrypt
 from mbp.models import User, Reading
-from mbp.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from mbp.forms import RegistrationForm, LoginForm, UpdateAccountForm, NewReadingForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 readings = [
@@ -98,6 +98,15 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+@app.route('/reading/new/', methods=['GET', 'POST'])
+@login_required
+def new_reading():
+    form = NewReadingForm()
+    if form.validate_on_submit():
+        flash('Your reading has been created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('new_reading.html', title='New Reading', form=form)
 
 @app.route('/about')
 def about():

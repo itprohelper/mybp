@@ -50,11 +50,11 @@ class UpdateAccountForm(FlaskForm):
             if user: #Validates if email exist and show the below error
                 raise ValidationError('That email is taken. Please choose a different one')
 
-class NewReading(FlaskForm):
+class NewReadingForm(FlaskForm):
     #date = DateField('Date', format='%Y-%m-%d', validators=[InputRequired()]) #difficult to enter day without from wtforms.fields.html5 import DateField
-    systolic = IntegerField('Systolic', validators=[InputRequired(),NumberRange(min=60, max=160, message="This value must be between 60 to 160.")])
-    diastolic = IntegerField('Diastolic', validators=[InputRequired(), NumberRange(min=50, max=140, message="This value must be between 50 to 140")])
-    notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=120)])
+    systolic = IntegerField('Systolic', validators=[DataRequired(),NumberRange(min=50, max=160, message="This value must be between 50 to 160.")])
+    diastolic = IntegerField('Diastolic', validators=[InputRequired(), NumberRange(min=50, max=160, message="This value must be between 50 to 160")])
+    notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=200)])
     submit = SubmitField('Add Reading')
 
 class NewDoctor(FlaskForm):

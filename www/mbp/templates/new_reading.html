@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    
+<div class="content-section">
+
+	<form class="form-signin" method="POST" action="">
+		<h2 class="form-signin-heading">New Reading</h2>
+		{{ form.hidden_tag() }}
+		<fieldset class="form-group">
+			<!--<legend class="border-bottom mb-4">Join Today</legend>-->
+
+
+			<div class="form-group">
+					{{ form.systolic.label(class="form-control-label") }}
+
+					{% if form.systolic.errors %}
+							{{ form.systolic(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+									{% for error in form.systolic.errors %}
+											<span>{{ error }}</span>
+									{% endfor %}
+							</div>
+					{% else %}
+							{{ form.systolic(class="form-control form-control-lg") }}
+					{% endif %}
+			</div>
+
+			<div class="form-group">
+					{{ form.diastolic.label(class="form-control-label") }}
+					{% if form.diastolic.errors %}
+							{{ form.diastolic(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+									{% for error in form.diastolic.errors %}
+											<span>{{ error }}</span>
+									{% endfor %}
+							</div>
+					{% else %}
+							{{ form.diastolic(class="form-control form-control-lg") }}
+					{% endif %}
+			</div>
+
+		</fieldset>
+		
+		<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+		</div>
+			
+	</form>
+</div>
+            
+{% endblock content %}
