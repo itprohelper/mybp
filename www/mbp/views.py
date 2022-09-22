@@ -30,8 +30,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route('/')
 @app.route('/home')
 def home():
-    readings = Reading.query.all()
-    return render_template('index.html', readings=readings)
+    reading = Reading.query.all()
+    return render_template('index.html', reading=reading)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -111,6 +111,11 @@ def new_reading():
         flash('Your reading has been created!', 'success')
         return redirect(url_for('home'))
     return render_template('new_reading.html', title='New Reading', form=form)
+
+@app.route('/reading/<int:reading_id>/')
+def reading(reading_id):
+    reading = Reading.query.get_or_404(reading_id)
+    return render_template('reading.html', title='User Readings', reading=reading)
 
 @app.route('/about')
 def about():

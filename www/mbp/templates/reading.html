@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for reading in reading %}
-    <article class="media content-section">
+    
+    <article class="media content-section"> 
       <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + reading.user.image_file) }}" />
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="#">{{ reading.user.username }}</a> <!--need to define the logic here-->
+          <a class="mr-2" href="#">{{ reading.user.username }}</a>
           <text class="font-weight-bold">{{ reading.sys }} /</text>
           <text class="font-weight-bold">{{ reading.dia}}</text>
           <small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small> <!--Need to display local time to the user-->
           
         </div>
-        <h2><a class="article-title" href="{{ url_for('reading', reading_id=reading.id) }}">{{ reading.user.username }}</a></h2><!--need to define the logic here-->
-          <p class="article-content">{{ reading.notes }}</p>
+        <h2 class="article-title">{{ reading.title }}</h2>
+            <p class="article-content">{{ reading.notes }}</p>
       </div>
     </article>
-    {% endfor %}
+    
 {% endblock content %}
+ 
