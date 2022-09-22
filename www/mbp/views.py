@@ -9,27 +9,28 @@ from mbp.models import User, Reading
 from mbp.forms import RegistrationForm, LoginForm, UpdateAccountForm, NewReadingForm
 from flask_login import login_user, current_user, logout_user, login_required
 
-readings = [
-    {
-        'user': 'Francisco Ulloa',
-        'sys': '122',
-        'dia': '77',
-        'notes': 'Oyendo perico ripiao',
-        'date': 'Aug 4, 2022 at 4:07PM'
-    },
-    {
-        'user': 'Pakar Kuruturuntun',
-        'sys': '140',
-        'dia': '90',
-        'notes': 'Oyendo Tika Tike Tuka',
-        'date': 'Aug 5, 2022 at 6:23PM'
-    }
-]
+#readings = [
+#    {
+#        'user': 'Francisco Ulloa',
+#        'sys': '122',
+#        'dia': '77',
+#        'notes': 'Oyendo perico ripiao',
+#        'date': 'Aug 4, 2022 at 4:07PM'
+#    },
+#    {
+#        'user': 'Pakar Kuruturuntun',
+#        'sys': '140',
+#        'dia': '90',
+#        'notes': 'Oyendo Tika Tike Tuka',
+#        'date': 'Aug 5, 2022 at 6:23PM'
+#    }
+#]
 
 
 @app.route('/')
 @app.route('/home')
 def home():
+    readings = Reading.query.all()
     return render_template('index.html', readings=readings)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -104,6 +105,9 @@ def account():
 def new_reading():
     form = NewReadingForm()
     if form.validate_on_submit():
+        reading = Reading(sys=form.systolic.data, dia=form.diastolic.data, notes=form.notes.data, user=current_user)
+        db.session.add(reading)
+        db.session.commit()
         flash('Your reading has been created!', 'success')
         return redirect(url_for('home'))
     return render_template('new_reading.html', title='New Reading', form=form)
