@@ -2,7 +2,7 @@ import os
 import secrets
 from PIL import Image #Pillow library to resize image in Account page.
 from crypt import methods
-from flask import render_template, jsonify, redirect, flash, url_for, request
+from flask import render_template, jsonify, redirect, flash, url_for, request, abort
 import json
 from mbp import app, db, bcrypt
 from mbp.models import User, Reading
@@ -110,12 +110,45 @@ def new_reading():
         db.session.commit()
         flash('Your reading has been created!', 'success')
         return redirect(url_for('home'))
-    return render_template('new_reading.html', title='New Reading', form=form)
+    return render_template('new_reading.html', title='New Reading',
+                            form=form, legend='New Reading')
 
 @app.route('/reading/<int:reading_id>/')
 def reading(reading_id):
     reading = Reading.query.get_or_404(reading_id)
     return render_template('reading.html', title='User Readings', reading=reading)
+
+@app.route('/reading/<int:reading_id>/update', methods=['GET', 'POST'])
+@login_required
+def update_reading(reading_id):
+    reading = Reading.query.get_or_404(reading_id)
+    if reading.user != current_user:
+        abort(403)
+    form = NewReadingForm()
+    if form.validate_on_submit():
+        reading.sys = form.systolic.data
+        reading.dia = form.diastolic.data
+        reading.notes = form.notes.data
+        db.session.commit()
+        flash('Your readings have been updated!', 'success')
+        return redirect(url_for('reading', reading_id=reading.id))
+    elif request.method == 'GET':
+        form.systolic.data = reading.sys
+        form.diastolic.data = reading.dia
+        form.notes.data = reading.notes
+    return render_template('new_reading.html', title='Update Reading',
+                            form=form, legend='Update Reading') #using the same template for new reading. Using legend to display different titles.
+
+@app.route('/reading/<int:reading_id>/delete', methods=['POST'])
+@login_required
+def delete_reading(reading_id):
+    reading = Reading.query.get_or_404(reading_id)
+    if reading.user != current_user:
+        abort(403)
+    db.session.delete(reading)
+    db.session.commit()
+    flash('Your readings have been deleted!', 'success')
+    return redirect(url_for('home'))
 
 @app.route('/about')
 def about():
