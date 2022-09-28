@@ -55,7 +55,7 @@ class NewReadingForm(FlaskForm):
     systolic = IntegerField('Systolic', validators=[InputRequired(), NumberRange(min=50, max=160, message="This value must be between 50 to 160.")])
     diastolic = IntegerField('Diastolic', validators=[InputRequired(), NumberRange(min=50, max=160, message="This value must be between 50 to 160")])
     notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=200)])
-    submit = SubmitField('Add Reading')
+    submit = SubmitField('Reading')
 
 class NewDoctor(FlaskForm):
     doctor_name = StringField('Doctor Name', validators=[Length(min=0, max=15)]) #Need to validate opcional y que no haga un entry al DB if blank
