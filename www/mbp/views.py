@@ -31,7 +31,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route('/home')
 def home():
     page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
-    reading = Reading.query.paginate(page=page, per_page=5) #Show 5 readings per page.
+    reading = Reading.query.order_by(Reading.date_posted.desc()).paginate(page=page, per_page=5) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
     return render_template('index.html', reading=reading)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -150,6 +150,15 @@ def delete_reading(reading_id):
     db.session.commit()
     flash('Your readings have been deleted!', 'success')
     return redirect(url_for('home'))
+
+@app.route('/user/<string:username>')
+def user_readings(username):
+    page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
+    user = User.query.filter_by(username=username).first_or_404()
+    reading = Reading.query.filter_by(user=user)\
+        .order_by(Reading.date_posted.desc())\
+        .paginate(page=page, per_page=5) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
+    return render_template('user_readings.html', reading=reading, user=user)
 
 @app.route('/about')
 def about():

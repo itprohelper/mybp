@@ -5,7 +5,7 @@
       <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + reading.user.image_file) }}" />
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="#">{{ reading.user.username }}</a>
+          <a class="mr-2" href="{{ url_for('user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a>
           <text class="font-weight-bold">{{ reading.sys }} /</text>
           <text class="font-weight-bold">{{ reading.dia}}</text>
           <small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small> <!--Need to display local time to the user-->
