@@ -30,8 +30,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route('/')
 @app.route('/home')
 def home():
-    page = request.args.get('page', 1, type=int)
-    reading = Reading.query.paginate(page=page, per_page=5)
+    page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
+    reading = Reading.query.paginate(page=page, per_page=5) #Show 5 readings per page.
     return render_template('index.html', reading=reading)
 
 @app.route('/register', methods=['GET', 'POST'])
