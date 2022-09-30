@@ -1,5 +1,6 @@
 from datetime import datetime
-from mbp import db, login_manager
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from mbp import db, login_manager, app
 from flask_login import UserMixin
 
 @login_manager.user_loader
@@ -14,6 +15,20 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     readings = db.relationship('Reading', backref='user', lazy=True)
+
+    def get_reset_token(self, expires_sec=1800): #Expires in 30min. 1800seconds.
+        s = Serializer(app.config['SECRET_KEY'], expires_sec) #use our secret key.
+        return s.dumps({'user_id': self.id}).decode('utf-8') #Return token created with Serializer in utf-8
+
+    #Method to verify token above
+    @staticmethod #tell python we're using a static method. Not to expect 'self' parameter as an argument.
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"

@@ -9,3 +9,4 @@ flask-moment
 Werkzeug
 flask-bcrypt
 Pillow
+itsdangerous==2.0.1

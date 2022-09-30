@@ -57,6 +57,22 @@ class NewReadingForm(FlaskForm):
     notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=200)])
     submit = SubmitField('Reading')
 
+class RequestResetForm(FlaksFrom):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:  #Validates if email exist and show the below error
+            raise ValidationError('There is no account with that email. You must register first.')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('password', validators=[DataRequired(), Length(min=8, max=80)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
+
+
+#-------------------Older forms. Maybe will use later-----------------#
 class NewDoctor(FlaskForm):
     doctor_name = StringField('Doctor Name', validators=[Length(min=0, max=15)]) #Need to validate opcional y que no haga un entry al DB if blank
     doctor_email = StringField('Doctor Email', validators=[Length(max=50)]) #Need to validate opcional y que no haga un entry al DB if blank

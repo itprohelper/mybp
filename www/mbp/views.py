@@ -6,7 +6,8 @@ from flask import render_template, jsonify, redirect, flash, url_for, request, a
 import json
 from mbp import app, db, bcrypt
 from mbp.models import User, Reading
-from mbp.forms import RegistrationForm, LoginForm, UpdateAccountForm, NewReadingForm
+from mbp.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
+                       NewReadingForm, RequestResetForm, ResetPasswordForm)
 from flask_login import login_user, current_user, logout_user, login_required
 
 #readings = [
@@ -159,6 +160,32 @@ def user_readings(username):
         .order_by(Reading.date_posted.desc())\
         .paginate(page=page, per_page=5) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
     return render_template('user_readings.html', reading=reading, user=user)
+
+def send_reset_email(user):
+    pass #sigue aqui********
+
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An email has been sent for resetting your password.', 'info')
+        return redirect(url_for('login'))
+    return render_template('reset_request.html', title='Reset Password', form=form)
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST']) #pass in the token in the URL
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_token(token) #pass in the token
+    if user is None: #if condition is met then the token was valid and we got the user. We can display the update form for the user.
+        flash('That is an invalid or expired token,' 'warning')
+        return redirect(url_for('reset_request'))
+    form = ResetPasswordForm()
+    return render_template('reset_token.html', title='Reset Password', form=form)
 
 @app.route('/about')
 def about():
