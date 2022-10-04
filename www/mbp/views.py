@@ -4,11 +4,12 @@ from PIL import Image #Pillow library to resize image in Account page.
 from crypt import methods
 from flask import render_template, jsonify, redirect, flash, url_for, request, abort
 import json
-from mbp import app, db, bcrypt
+from mbp import app, db, bcrypt, mail
 from mbp.models import User, Reading
 from mbp.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                        NewReadingForm, RequestResetForm, ResetPasswordForm)
 from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
 
 #readings = [
 #    {
@@ -162,7 +163,16 @@ def user_readings(username):
     return render_template('user_readings.html', reading=reading, user=user)
 
 def send_reset_email(user):
-    pass #sigue aqui********
+    token = user.get_reset_token()
+    msg = Message('Password Reset Requet',
+                    sender='noreply@itprohelper.com',
+                    recipients=[user.email])
+    msg.body = f'''To reset your password, visit the following link:
+{url_for('reset_token', token=token, _external=True)}
+
+If you did not make this request then simply ignore this email. No changes will be made.
+'''
+    mail.send(msg)
 
 @app.route('/reset_password', methods=['GET', 'POST'])
 def reset_request():
@@ -185,6 +195,13 @@ def reset_token(token):
         flash('That is an invalid or expired token,' 'warning')
         return redirect(url_for('reset_request'))
     form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit() #Commit changes to database
+        flash('Your password has been updated! You can now login.', 'success') #Display flash confirmation message.
+        return redirect(url_for('login')) #When the form is a success redirect to login page.
+
     return render_template('reset_token.html', title='Reset Password', form=form)
 
 @app.route('/about')

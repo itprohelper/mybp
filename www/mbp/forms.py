@@ -57,7 +57,7 @@ class NewReadingForm(FlaskForm):
     notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=200)])
     submit = SubmitField('Reading')
 
-class RequestResetForm(FlaksFrom):
+class RequestResetForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
 
