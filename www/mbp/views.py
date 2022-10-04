@@ -165,7 +165,7 @@ def user_readings(username):
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Password Reset Requet',
-                    sender='noreply@itprohelper.com',
+                    sender='mbp@itprohelper.com',
                     recipients=[user.email])
     msg.body = f'''To reset your password, visit the following link:
 {url_for('reset_token', token=token, _external=True)}

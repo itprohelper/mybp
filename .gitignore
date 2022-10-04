@@ -3,3 +3,4 @@ __pycache__/
 dashboard-ori.html
 createdb.py
 www/mbp/config.py
+www/.env
