@@ -5,13 +5,13 @@
       <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + reading.user.image_file) }}" />
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="{{ url_for('user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a>
+          <a class="mr-2" href="{{ url_for('users.user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a>
           <text class="font-weight-bold">{{ reading.sys }} /</text>
           <text class="font-weight-bold">{{ reading.dia}}</text>
           <small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small> <!--Need to display local time to the user-->
           {% if reading.user == current_user %}
             <div>
-              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_reading', reading_id=reading.id) }}">Update</a>
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('users.update_reading', reading_id=reading.id) }}">Update</a>
               <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
             </div>
           {% endif %}
@@ -32,7 +32,7 @@
            </div>
            <div class="modal-footer">
              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             <form action="{{ url_for('delete_reading', reading_id=reading.id) }}" method="POST">
+             <form action="{{ url_for('users.delete_reading', reading_id=reading.id) }}" method="POST">
                <input class="btn btn-danger" type="submit" value="Delete">
              </form>
            </div>

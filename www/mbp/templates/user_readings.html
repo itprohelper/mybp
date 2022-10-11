@@ -6,13 +6,13 @@
       <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + reading.user.image_file) }}" />
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="{{ url_for('user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a> <!--need to define the logic here-->
+          <a class="mr-2" href="{{ url_for('users.user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a> <!--need to define the logic here-->
           <text class="font-weight-bold">{{ reading.sys }} /</text>
           <text class="font-weight-bold">{{ reading.dia}}</text>
           <small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small> <!--Need to display local time to the user-->
-          
+
         </div>
-        <h2><a class="article-title" href="{{ url_for('reading', reading_id=reading.id) }}">Review/Edit</a></h2><!--need to define the logic here. Por ahora esta bien.-->
+        <h2><a class="article-title" href="{{ url_for('reading.reading', reading_id=reading.id) }}">Review/Edit</a></h2><!--need to define the logic here. Por ahora esta bien.-->
           <p class="article-content">{{ reading.notes }}</p>
       </div>
     </article>
@@ -21,9 +21,9 @@
     {% for page_num in reading.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
         {% if reading.page == page_num %}
-          <a class="btn btn-info mb-4" href="{{ url_for('user_readings', username=user.username, page=page_num) }}">{{ page_num }}</a>
+          <a class="btn btn-info mb-4" href="{{ url_for('users.user_readings', username=user.username, page=page_num) }}">{{ page_num }}</a>
         {% else %}
-          <a class="btn btn-outline-info mb-4" href="{{ url_for('user_readings', username=user.username, page=page_num) }}">{{ page_num }}</a>
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('users.user_readings', username=user.username, page=page_num) }}">{{ page_num }}</a>
         {% endif %}
       {% else %}
         ...

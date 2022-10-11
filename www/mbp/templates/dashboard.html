@@ -33,9 +33,9 @@ Dashboard | My BP
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Dashboard</a></li>
-            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+            <li><a href="{{ url_for('users.settings') }}">Settings</a></li>
 
-            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -49,13 +49,13 @@ Dashboard | My BP
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ url_for('reports') }}">Reports</a></li>
+            <li><a href="{{ url_for('users.reports') }}">Reports</a></li>
             <!--<li><a href="#">Analytics</a></li>-->
 
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Welcome, {{ name }} <a href="{{ url_for('newreading') }}" class="btn btn-success"> New Reading</a></h1>
+          <h1 class="page-header">Welcome, {{ name }} <a href="{{ url_for('reading.newreading') }}" class="btn btn-success"> New Reading</a></h1>
 
 
 
@@ -131,7 +131,7 @@ Dashboard | My BP
                   <td>{{row.systolic}}</td>
                   <td>{{row.diastolic}}</td>
                   <td>{{row.notes}}</td>
-                  <td><a href="{{ url_for('editreading', id = row.id) }}" class="btn btn-warning btn-xs">Edit</a>
+                  <td><a href="{{ url_for('reading.editreading', id = row.id) }}" class="btn btn-warning btn-xs">Edit</a>
 
                       <a href="/deletereading/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
                   </td>
@@ -172,7 +172,7 @@ Dashboard | My BP
                 </div>
 
                   <div class="modal-body">
-                    <form method="POST" action="{{url_for('newreading')}}">
+                    <form method="POST" action="{{url_for('reading.newreading')}}">
                       {{ form.hidden_tag() }}
                       {{ wtf.form_field(form.systolic) }}
                       {{ wtf.form_field(form.diastolic) }}
