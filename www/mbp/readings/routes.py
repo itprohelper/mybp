@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import Blueprint
 from flask import (render_template, url_for, flash,
                   redirect, request, abort)
@@ -7,9 +6,9 @@ from mbp import db
 from mbp.models import Reading
 from mbp.readings.forms import NewReadingForm
 
-reading = Blueprint('reading', __name__)
-=======
-from flask import (render_template, jsonify, redirect, flash, 
+readings = Blueprint('readings', __name__)
+
+from flask import (render_template, jsonify, redirect, flash,
                     url_for, request, abort, Blueprint)
 from flask_login import login_user, current_user, logout_user, login_required
 from mbp import db
@@ -50,11 +49,11 @@ def update_reading(reading_id):
         reading.notes = form.notes.data
         db.session.commit()
         flash('Your readings have been updated!', 'success')
-<<<<<<< HEAD
+
         return redirect(url_for('reading.reading', reading_id=reading.id))
-=======
+
         return redirect(url_for('readings.reading', reading_id=reading.id))
->>>>>>> 239e7cc0063d2caea276dd99a61fd9a5abdf5c04
+
     elif request.method == 'GET':
         form.systolic.data = reading.sys
         form.diastolic.data = reading.dia
@@ -71,8 +70,7 @@ def delete_reading(reading_id):
     db.session.delete(reading)
     db.session.commit()
     flash('Your readings have been deleted!', 'success')
-<<<<<<< HEAD
+
     return redirect(url_for('main.home'))
-=======
+
     return redirect(url_for('main.home'))
->>>>>>> 239e7cc0063d2caea276dd99a61fd9a5abdf5c04
