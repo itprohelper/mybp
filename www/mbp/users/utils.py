@@ -1,9 +1,19 @@
 import os
 import secrets
 from PIL import Image #Pillow library to resize image in Account page.
+<<<<<<< HEAD
 from flask import url_for
 from flask_mail import Message
 from mbp import app, mail
+=======
+from crypt import methods
+
+import json
+from mbp import app, db, bcrypt, mail
+from flask_mail import Message
+#from mbp.models import User, Reading
+#from flask_login import login_user, current_user, logout_user, login_required
+>>>>>>> 239e7cc0063d2caea276dd99a61fd9a5abdf5c04
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8) #saves filename in hex

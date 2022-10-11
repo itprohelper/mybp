@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 from flask import Blueprint
 from flask import render_template, request
+=======
+from flask import render_template, jsonify, redirect, flash, url_for, request, abort, Blueprint
+>>>>>>> 239e7cc0063d2caea276dd99a61fd9a5abdf5c04
 from mbp.models import Reading
 
 main = Blueprint('main', __name__)
@@ -11,6 +15,13 @@ def home():
     reading = Reading.query.order_by(Reading.date_posted.desc()).paginate(page=page, per_page=5) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
     return render_template('index.html', reading=reading)
 
+<<<<<<< HEAD
 @main.route('/about')
 def about():
     return render_template('about.html', title='About')
+=======
+
+@main.route('/about')
+def about():
+    return render_template('about.html', title='About')
+>>>>>>> 239e7cc0063d2caea276dd99a61fd9a5abdf5c04
