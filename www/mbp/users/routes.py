@@ -3,16 +3,11 @@ from flask import Blueprint
 from flask import (render_template, url_for, flash,
                   redirect, request, abort)
 
-from flask import render_template, url_for, flash, redirect, request, Blueprint
-
 from flask_login import login_user, current_user, logout_user, login_required
 from mbp import db, bcrypt
 from mbp.models import User, Reading
 from mbp.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                             RequestResetForm, ResetPasswordForm)
-
-
-
 from mbp.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
@@ -20,11 +15,7 @@ users = Blueprint('users', __name__)
 @users.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-
-        return redirect(url_for('main.home')) #check if the current user if logged in and redirect to home page.
-
-        return redirect(url_for('home')) #check if the current user if logged in and redirect to home page.
-
+        return redirect(url_for('main.home')) #check if the current user if logged in and redirect to home page.     
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -32,19 +23,13 @@ def register():
         db.session.add(user) #Add user to database
         db.session.commit() #Commit changes to database
         flash('Your account has been created!', 'success') #Display flash confirmation message.
-
         return redirect(url_for('users.login')) #When the form is a success redirect to login page.
-
     return render_template('register.html', title='Register', form=form)
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-
         return redirect(url_for('users.home')) #check if the current user if logged in and redirect to home page.
-
-
-
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first() #query database for user entered in form.
@@ -53,9 +38,7 @@ def login():
             next_page = request.args.get('next') #no estoy claro porque todavia.
 
             return redirect(next_page) if next_page else redirect(url_for('main.home')) #send user back to home page if all good.
-
-            return redirect(next_page) if next_page else redirect(url_for('home')) #send user back to home page if all good.
-
+            
         else:
             flash('Login no good. Please check email and password', 'danger') #then user will be redirected to login page.
     return render_template('login.html', title='Login', form=form)
@@ -102,18 +85,11 @@ def user_readings(username):
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
-
-@app.route('/reset_password', methods=['GET', 'POST'])
-def reset_request():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
         flash('An email has been sent for resetting your password.', 'info')
-
         return redirect(url_for('users.login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
@@ -124,20 +100,7 @@ def reset_token(token):
     user = User.verify_reset_token(token) #pass in the token
     if user is None: #if condition is met then the token was valid and we got the user. We can display the update form for the user.
         flash('That is an invalid or expired token,' 'warning')
-        return redirect(url_for('utils.reset_request'))
-
-        return redirect(url_for('login'))
-    return render_template('reset_request.html', title='Reset Password', form=form)
-
-@app.route('/reset_password/<token>', methods=['GET', 'POST']) #pass in the token in the URL
-def reset_token(token):
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    user = User.verify_reset_token(token) #pass in the token
-    if user is None: #if condition is met then the token was valid and we got the user. We can display the update form for the user.
-        flash('That is an invalid or expired token,' 'warning')
-        return redirect(url_for('reset_request'))
-
+        return redirect(url_for('utils.reset_request')) 
     form = ResetPasswordForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -146,8 +109,5 @@ def reset_token(token):
         flash('Your password has been updated! You can now login.', 'success') #Display flash confirmation message.
 
         return redirect(url_for('users.login')) #When the form is a success redirect to login page.
-
-        return redirect(url_for('login')) #When the form is a success redirect to login page.
-
-
+        
     return render_template('reset_token.html', title='Reset Password', form=form)

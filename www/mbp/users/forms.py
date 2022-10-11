@@ -2,15 +2,9 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Email, Length, NumberRange, EqualTo, DataRequired, ValidationError
-<<<<<<< HEAD
+
 from flask_login import current_user #to validate user and email updates in UpdateAccountForm
 from mbp.models import User #despues tengo que import Reading, Doctor y etc aqui
-
-
-=======
-from flask_login import current_user
-from mbp.models import User
->>>>>>> 239e7cc0063d2caea276dd99a61fd9a5abdf5c04
 
 class LoginForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), Email()])
@@ -67,7 +61,7 @@ class RequestResetForm(FlaskForm):
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('password', validators=[DataRequired(), Length(min=8, max=80)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-<<<<<<< HEAD
+
     submit = SubmitField('Reset Password')
 
 #-------------------Older forms. Maybe will use later-----------------#
@@ -81,6 +75,3 @@ class ResetPasswordForm(FlaskForm):
 #    diastolic = IntegerField('Diastolic', validators=[InputRequired(), NumberRange(min=50, max=140, message="This value must be between 50 to 140")])
 #    notes = TextAreaField('Notes', validators=[InputRequired(), Length(max=120)])
 #    submit = SubmitField('Edit Reading')
-=======
-    submit = SubmitField('Reset Password')
->>>>>>> 239e7cc0063d2caea276dd99a61fd9a5abdf5c04
