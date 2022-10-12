@@ -9,8 +9,9 @@ WORKDIR /opt/www
 COPY requirements.txt requirements.txt
 
 #Set environment for flask
-ENV FLASK_APP=app.py
+ENV FLASK_APP=mbp
 ENV FLASK_RUN_HOST=0.0.0.0
+#ENV SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
 
 #run some updates and install NTP server(need to see if I need this.)
 RUN apt-get update
