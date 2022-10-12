@@ -14,7 +14,7 @@ def save_picture(form_picture):
     random_hex = secrets.token_hex(8) #saves filename in hex
     _, f_ext = os.path.splitext(form_picture.filename) #save filename with same extension: png or jpg
     picture_fn = random_hex + f_ext #combine random hex with filename - concatane both together
-    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+    picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
 
     #resize image using the Pillow library
     output_size = (125, 125) #set to 125x125 pixels

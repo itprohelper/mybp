@@ -11,7 +11,7 @@
           <small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small> <!--Need to display local time to the user-->
           {% if reading.user == current_user %}
             <div>
-              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('users.update_reading', reading_id=reading.id) }}">Update</a>
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('readings.update_reading', reading_id=reading.id) }}">Update</a>
               <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
             </div>
           {% endif %}
@@ -32,7 +32,7 @@
            </div>
            <div class="modal-footer">
              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             <form action="{{ url_for('users.delete_reading', reading_id=reading.id) }}" method="POST">
+             <form action="{{ url_for('readings.delete_reading', reading_id=reading.id) }}" method="POST">
                <input class="btn btn-danger" type="submit" value="Delete">
              </form>
            </div>

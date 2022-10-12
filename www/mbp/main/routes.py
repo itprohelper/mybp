@@ -1,8 +1,4 @@
-from flask import Blueprint
-from flask import render_template, request
-
-from flask import render_template, jsonify, redirect, flash, url_for, request, abort, Blueprint
-
+from flask import render_template, request, Blueprint
 from mbp.models import Reading
 
 main = Blueprint('main', __name__)
@@ -18,8 +14,3 @@ def home():
 @main.route('/about')
 def about():
     return render_template('about.html', title='About')
-
-@main.route('/about')
-def about():
-    return render_template('about.html', title='About')
-

@@ -40,7 +40,7 @@ def update_reading(reading_id):
         db.session.commit()
         flash('Your readings have been updated!', 'success')
 
-        return redirect(url_for('reading.reading', reading_id=reading.id))
+        return redirect(url_for('readings.reading', reading_id=reading.id))
 
     elif request.method == 'GET':
         form.systolic.data = reading.sys
