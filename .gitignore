@@ -1,6 +1,3 @@
-database/
 __pycache__/
-dashboard-ori.html
-createdb.py
-mbp/config.py
-www/.env
+www/createdb.py
+www/mbp/config.py 
