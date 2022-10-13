@@ -24,9 +24,11 @@ def create_app(config_class=Config):
     from mbp.users.routes import users
     from mbp.readings.routes import readings
     from mbp.main.routes import main
+    from mbp.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(readings)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
