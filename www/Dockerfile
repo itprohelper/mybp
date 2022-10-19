@@ -23,7 +23,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Server port for  flask app
-EXPOSE 5000
+#EXPOSE 5000
 
 # TODO como hacer para correr models.py y crear tables?
 #RUN python3 \
