@@ -1,3 +1,4 @@
 __pycache__/
 www/mbp/config.py
 .DS_Store
+www/.env
