@@ -7,6 +7,18 @@ Using your terminal go to the directory where you cloned this repo and then star
 ```bash
 docker compose up
 ```
+## Setup your environment variables
+You will need to create a file .env under the www/ directory with the following values:
+
+```bash
+SECRET_KEY=<your_secret_key>
+SQLALCHEMY_DATABASE_URI=sqlite:///site.db (this is an example-poing your DB to the right location)
+MAIL_SERVER=<your_SMTP_server>
+MAIL_PORT=<port_your_mail_server_uses>
+MAIL_USE_TLS=True or False
+MAIL_USERNAME=<your_email_for_sending>
+MAIL_PASSWORD=<your_mail_server_password>
+```
 
 ## More details are coming soon.
 I also wrote some brief tutorials on different subjects hoping to help somebody.
