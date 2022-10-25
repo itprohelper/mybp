@@ -16,10 +16,13 @@ services:
           condition: service_started
     volumes:
       - ./www:/opt/www
+    env_file:
+      - ./www/.env
     environment:
-      FLASK_DEBUG: 1 #have the app run in debug mode.
+      FLASK_DEBUG: 1 #have the app run in debug mode. Change to 0 to turn OFF.
+      #SECRET_KEY:
     ports:
-      - "8000:5000"
+      - "5000:5000"
 
 
 volumes:
