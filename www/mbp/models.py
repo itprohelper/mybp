@@ -18,13 +18,13 @@ class User(db.Model, UserMixin):
     readings = db.relationship('Reading', backref='user', lazy=True)
 
     def get_reset_token(self, expires_sec=1800): #Expires in 30min. 1800seconds.
-        s = Serializer(app.config['SECRET_KEY'], expires_sec) #use our secret key.
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec) #use our secret key.
         return s.dumps({'user_id': self.id}).decode('utf-8') #Return token created with Serializer in utf-8
 
     #Method to verify token above
     @staticmethod #tell python we're using a static method. Not to expect 'self' parameter as an argument.
     def verify_reset_token(token):
-        s = Serializer(app.config['SECRET_KEY'])
+        s = Serializer(current_app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']
         except:
