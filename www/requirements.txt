@@ -12,3 +12,4 @@ Pillow
 itsdangerous==2.0.1
 flask-mail
 python-dotenv
+gunicorn
