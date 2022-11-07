@@ -14,7 +14,7 @@ ENV FLASK_RUN_HOST=0.0.0.0
 #ENV SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
 
 #run some updates and install NTP server(need to see if I need this.)
-RUN apt-get update
+RUN apt-get update && apt-get install -y nginx
 
 #Install requirements
 RUN pip install -r requirements.txt
