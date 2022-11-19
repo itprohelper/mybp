@@ -1,3 +1,3 @@
 FROM nginx:alpine
-# RUN rm /etc/nginx/sites-enabled/default
+RUN mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
 COPY mbp.conf /etc/nginx/conf.d/
