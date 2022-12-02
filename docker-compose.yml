@@ -29,6 +29,8 @@ services:
     build: nginx/.
     ports:
       - '80:80'
+    volumes:
+      - ./nginx/mbp.conf:/etc/nginx/conf.d/mbp.conf:ro
 
 
 volumes:
