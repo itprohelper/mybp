@@ -19,7 +19,7 @@ services:
     env_file:
       - ./www/.env
     environment:
-      FLASK_DEBUG: 1 #have the app run in debug mode. Change to 0 to turn OFF.
+      FLASK_DEBUG: 0 #have the app run in debug mode. Change to 0 to turn OFF.
       #SECRET_KEY:
     ports:
       - '5000:5000'
@@ -27,6 +27,8 @@ services:
   nginx:
     restart: always
     build: nginx/.
+    depends_on:
+      - www
     ports:
       - '80:80'
     volumes:
