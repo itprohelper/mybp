@@ -31,7 +31,8 @@ RUN apt-get update
 #    && db.create_all() \
 #    && exit()
 
-CMD ["flask",  "run"]
+CMD gunicorn --bind 0.0.0.0:5000 app:app
+#CMD ["flask",  "run"]
 #RUN python createdb.py habria que instalar mariadb client o correr esto en el Dockerfile en db.
 #(ver ejemplo del Bret docker capitan para esperar que el DB empieze primero y despues correr esto)
 #CMD python app.py
