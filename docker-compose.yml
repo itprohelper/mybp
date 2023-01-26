@@ -16,6 +16,7 @@ services:
           condition: service_started
     volumes:
       - ./www:/opt/www
+      #- ./www/mbp/templates:/opt/www/templates
     env_file:
       - ./www/.env
     environment:
@@ -37,4 +38,4 @@ services:
 
 volumes:
   database:
-  www:
+  #www:

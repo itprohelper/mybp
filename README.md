@@ -20,6 +20,9 @@ MAIL_USERNAME=<your_email_for_sending>
 MAIL_PASSWORD=<your_mail_server_password>
 ```
 
+## To be done
+I need to modify the home page to display ONLY the readings for the current user logged in.
+
 ## More details are coming soon.
 I also wrote some brief tutorials on different subjects hoping to help somebody.
 See them on my site [ITPro Helper](https://itprohelper.com)

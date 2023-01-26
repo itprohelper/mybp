@@ -10,4 +10,3 @@ class NewReadingForm(FlaskForm):
 
     submit = SubmitField('Reading')
 
-    submit = SubmitField('Reading')
