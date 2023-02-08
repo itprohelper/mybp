@@ -12,8 +12,9 @@ from mbp.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
 
-@users.route('/dashboard', methods=['GET', 'POST'])
-def dashboard():
+@users.route('/dashboard/<string:username>', methods=['GET', 'POST'])
+@login_required
+def dashboard(username):
     page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
     user = User.query.filter_by(username=username).first_or_404()
     reading = Reading.query.filter_by(user=user)\
