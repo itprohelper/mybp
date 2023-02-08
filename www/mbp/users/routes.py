@@ -19,10 +19,10 @@ def dashboard(username):
     user = User.query.filter_by(username=username).first_or_404()
     reading = Reading.query.filter_by(user=user)\
         .order_by(Reading.date_posted.desc())\
-        .paginate(page=page, per_page=5)
+        .paginate(page=page, per_page=3)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).filter_by(user_id=current_user.id).all().paginate(page=page, per_page=5)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).paginate(page=page, per_page=6) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
-    return render_template('dashboard.html', title='Dashboard', reading=reading)
+    return render_template('dashboard.html', title='Dashboard', reading=reading, user=user)
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
@@ -84,6 +84,7 @@ def account():
 
 
 @users.route('/user/<string:username>')
+@login_required
 def user_readings(username):
     page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
     user = User.query.filter_by(username=username).first_or_404()
