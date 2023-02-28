@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{ current_user.username }}</h1>
-    <p>More coming soon.</p>
-{% endblock content%}
+<div class="content-section">
+  <div class="media">
+    <img class="rounded-circle account-img" src="{{ image_file }}">
+    <div class="media-body">
+      <h2 class="account-heading">{{ current_user.username }}</h2>
+      <p class="text-secondary">{{ current_user.email }}</p>
+    </div>
+  </div>
+
+  <legend class="border-bottom mb-4">Latest Readings</legend>
+  129/81 |  133/78 |  122/70 <br />
+
+  Past week readings
+</div>
+{% endblock content %}
