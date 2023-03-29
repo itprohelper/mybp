@@ -12,19 +12,18 @@ from mbp.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
 
-@users.route('/dashboard/<string:username>', methods=['GET', 'POST'])
-@login_required
-def dashboard(username):
+#@users.route('/dashboard/<string:username>', methods=['GET', 'POST'])
+#@login_required
+#def dashboard(username):
     #page = request.args.get('page', 1, type=int) Grab the page we want. In this case page one. Set type integer as the page number.
-    page = request.args.get('page', 1, type=int)
-    user = User.query.filter_by(username=username).first_or_404()
-    reading = Reading.query.filter_by(user=user)\
-        .order_by(Reading.date_posted.desc())\
-        .paginate(page=page, per_page=3)
+#    page = request.args.get('page', 1, type=int)
+#    user = User.query.filter_by(username=username).first_or_404()
+#    reading = Reading.query.filter_by(user=user)\
+#        .order_by(Reading.date_posted.desc())\
+#        .paginate(page=page, per_page=3)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).filter_by(user_id=current_user.id).all().paginate(page=page, per_page=5)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).paginate(page=page, per_page=6) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
     #return render_template('dashboard.html', title='Dashboard', reading=reading, user=user)
-    return render_template('dashboard.html', title='Dashboard', reading=reading, user=user)
 
 @users.route('/user/<string:username>')
 @login_required
@@ -53,7 +52,7 @@ def register():
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('users.dashboard')) #check if the current user is logged in and redirect to home page.
+        return redirect(url_for('main.home')) #check if the current user is logged in and redirect to home page.
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first() #query database for user entered in form.
@@ -61,7 +60,7 @@ def login():
             login_user(user, remember=form.remember.data) #login the user if it exist and password is correct also pass in the remember me checkbox.
             next_page = request.args.get('next') #para el target page por ejemplo si entras /account page sin estar login.
 
-            return redirect(next_page) if next_page else redirect(url_for('users.dashboard')) #send user back to home page if all good.
+            return redirect(next_page) if next_page else redirect(url_for('main.home')) #send user back to home page if all good.
             
         else:
             flash('Login no good. Please check email and password', 'danger') #then user will be redirected to login page.
