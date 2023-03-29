@@ -10,8 +10,10 @@
   </div>
 
   <legend class="border-bottom mb-4">Latest Readings</legend>
+  {{ current_user.readings }}
+  {{ current_user.readings.sys }}
   129/81 |  133/78 |  122/70 <br />
-  <a class="mr-2" href="{{ url_for('users.user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a>
+  
 
   Past week readings
 </div>
