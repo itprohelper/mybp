@@ -11,12 +11,13 @@
 
   <legend class="border-bottom mb-4">Latest Readings</legend>
   
-  <text class="font-weight-bold">nada</text>
-  <p>TT</p>
+  <text class="font-weight-bold">Last three readings</text>
+  {% for reading in reading.items %}
+  <p>{{ reading.sys }} {{ reading.dia }} - {{ reading.notes }}</p>
   
+  {% endfor %}
   
-  
-  129/81 |  133/78 |  122/70 <br />
+  <br />
   
 
   Past week readings
