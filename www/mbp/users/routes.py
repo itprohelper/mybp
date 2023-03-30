@@ -12,13 +12,13 @@ from mbp.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
 
-@users.route('/dashboard', methods=['GET', 'POST'])
+@users.route('/dashboard/<username>', methods=['GET', 'POST'])
 @login_required
 def dashboard(username):
     page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
 #    page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
-    reading = Reading.query.filter_by(author=user)\
+    reading = Reading.query.filter_by(user=user)\
     .order_by(Reading.date_posted.desc())\
     .paginate(page=page, per_page=3)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).filter_by(user_id=current_user.id).all().paginate(page=page, per_page=5)
@@ -30,7 +30,7 @@ def dashboard(username):
 def user_readings(username):
     page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
     user = User.query.filter_by(username=username).first_or_404()
-    reading = Reading.query.filter_by(author=user)\
+    reading = Reading.query.filter_by(user=user)\
         .order_by(Reading.date_posted.desc())\
         .paginate(page=page, per_page=5) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
     return render_template('user_readings.html', reading=reading, user=user)
