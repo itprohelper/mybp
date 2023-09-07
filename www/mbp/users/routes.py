@@ -12,6 +12,7 @@ from mbp.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
 
+# need to add this route to menu to be displayed ONLY to the current user logged in.
 @users.route('/dashboard/<username>', methods=['GET', 'POST'])
 @login_required
 def dashboard(username):
