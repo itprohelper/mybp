@@ -16,6 +16,7 @@ users = Blueprint('users', __name__)
 @users.route('/dashboard/', methods=['GET', 'POST'])
 @login_required
 def dashboard():
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
    # page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
 #    page = request.args.get('page', 1, type=int)
     #user = User.query.filter_by(username=username).first_or_404()
@@ -26,7 +27,28 @@ def dashboard():
     #    abort(403)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).filter_by(user_id=current_user.id).all().paginate(page=page, per_page=5)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).paginate(page=page, per_page=6) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
-    return render_template('dashboard.html', title='Dashboard') #reading=reading, user=user)
+    return render_template('dashboard.html', title='Dashboard', image_file=image_file) #reading=reading, user=user)
+
+@users.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+
+        return redirect(url_for('users.account'))
+
+    elif request.method == 'GET': #if a GET populate user's current data in the form.
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 @users.route('/user/<string:username>')
 @login_required
@@ -74,29 +96,6 @@ def logout():
     logout_user()
 
     return redirect(url_for('main.home'))
-
-@users.route('/account', methods=['GET', 'POST'])
-@login_required
-def account():
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
-        if form.picture.data:
-            picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        db.session.commit()
-        flash('Your account has been updated!', 'success')
-
-        return redirect(url_for('users.account'))
-
-    elif request.method == 'GET': #if a GET populate user's current data in the form.
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('account.html', title='Account', image_file=image_file, form=form)
-
-
 
 @users.route('/reset_password', methods=['GET', 'POST'])
 def reset_request():
