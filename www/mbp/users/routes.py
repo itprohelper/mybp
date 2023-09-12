@@ -58,7 +58,7 @@ def user_readings(username):
     reading = Reading.query.filter_by(user=user)\
         .order_by(Reading.date_posted.desc())\
         .paginate(page=page, per_page=5) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
-    return render_template('user_readings.html', reading=reading, user=user)
+    return render_template('user_readings.html', title='Dashboard2', reading=reading, user=user, username=username)
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
