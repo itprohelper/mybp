@@ -78,7 +78,7 @@ def register():
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home')) #check if the current user is logged in and redirect to home page.
+        return redirect(url_for('users.user_readings', username=current_user.username)) #check if the current user is logged in and redirect to home page.
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first() #query database for user entered in form.
@@ -86,7 +86,7 @@ def login():
             login_user(user, remember=form.remember.data) #login the user if it exist and password is correct also pass in the remember me checkbox.
             next_page = request.args.get('next') #para el target page por ejemplo si entras /account page sin estar login.
 
-            return redirect(next_page) if next_page else redirect(url_for('main.home')) #send user back to home page if all good.
+            return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.username)) #send user back to home page if all good.
             
         else:
             flash('Login no good. Please check email and password', 'danger') #then user will be redirected to login page.
