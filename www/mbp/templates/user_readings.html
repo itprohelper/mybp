@@ -6,7 +6,6 @@
       <div class="media-body">
         <h2 class="account-heading">{{ current_user.username }}</h2>
         <p class="article-metadata">{{ current_user.email }}</p>
-
         <p class="font-weight-bold">Last reading at 'time here'</p>
       </div>
     </div>
@@ -20,7 +19,9 @@
           <a class="mr-2" href="{{ url_for('users.user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a> <!--need to define the logic here-->
           <small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small> <!--Need to display local time to the user-->
         </div>
-        <h2><a class="article-content" href="{{ url_for('readings.reading', reading_id=reading.id) }}">Edit</a></h2><!--need to define the logic here. Por ahora esta bien.-->
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('readings.update_reading', reading_id=reading.id) }}">Update</a>
+        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        <!--<h2><a class="article-content" href="{{ url_for('readings.reading', reading_id=reading.id) }}">Edit</a></h2>-->
         <text class="font-weight-bold">{{ reading.sys }} /</text>
           <text class="font-weight-bold">{{ reading.dia}}</text>
           <p class="article-content">{{ reading.notes }}</p>
@@ -39,5 +40,5 @@
         ...
       {% endif %}
     {% endfor %}
-
+   
 {% endblock content %}
