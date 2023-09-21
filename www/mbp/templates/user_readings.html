@@ -19,14 +19,32 @@
           <a class="mr-2" href="{{ url_for('users.user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a> <!--need to define the logic here-->
           <small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small> <!--Need to display local time to the user-->
         </div>
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('readings.update_reading', reading_id=reading.id) }}">Update</a>
-        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-        <!--<h2><a class="article-content" href="{{ url_for('readings.reading', reading_id=reading.id) }}">Edit</a></h2>-->
+                <!--<h2><a class="article-content" href="{{ url_for('readings.reading', reading_id=reading.id) }}">Edit</a></h2>-->
         <text class="font-weight-bold">{{ reading.sys }} /</text>
           <text class="font-weight-bold">{{ reading.dia}}</text>
           <p class="article-content">{{ reading.notes }}</p>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('readings.update_reading', reading_id=reading.id) }}">Update</a>
+        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
       </div>
     </article>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete Reading?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action="{{ url_for('readings.delete_reading', reading_id=reading.id) }}" method="POST">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     {% endfor %}
     <!--Create button pagination at the bottom of page. Styles also how many button links show-->
     {% for page_num in reading.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
