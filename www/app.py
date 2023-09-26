@@ -1,4 +1,3 @@
-#from mbp import app
 from mbp import create_app
 
 app = create_app()
