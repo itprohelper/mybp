@@ -13,13 +13,15 @@ from mbp.users.utils import save_picture, send_reset_email
 users = Blueprint('users', __name__)
 
 # need to add this route to menu to be displayed ONLY to the current user logged in.
-@users.route('/dashboard/', methods=['GET', 'POST'])
+@users.route('/dashboard')
 @login_required
 def dashboard():
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
    # page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
 #    page = request.args.get('page', 1, type=int)
     #user = User.query.filter_by(username=username).first_or_404()
+    lreading = Reading.query.order_by(Reading.id.desc()).first()
+        
     #reading = Reading.query.filter_by(user=user)\
     #.order_by(Reading.date_posted.desc())\
     #.paginate(page=page, per_page=3) #displays last three readings in order. newest first.
@@ -27,7 +29,7 @@ def dashboard():
     #    abort(403)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).filter_by(user_id=current_user.id).all().paginate(page=page, per_page=5)
     #reading = Reading.query.order_by(Reading.date_posted.desc()).paginate(page=page, per_page=6) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
-    return render_template('dashboard.html', title='Dashboard', image_file=image_file) #reading=reading, user=user)
+    return render_template('dashboard.html', title='Dashboard', image_file=image_file, lreading=lreading) #reading=reading, user=user)
 
 @users.route('/account', methods=['GET', 'POST'])
 @login_required
