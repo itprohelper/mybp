@@ -57,11 +57,12 @@ def account():
 def user_readings(username):
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
+    lreading = Reading.query.order_by(Reading.id.desc()).first()
     user = User.query.filter_by(username=username).first_or_404()
     reading = Reading.query.filter_by(user=user)\
         .order_by(Reading.date_posted.desc())\
         .paginate(page=page, per_page=5) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
-    return render_template('user_readings.html', title='Dashboard2', reading=reading, user=user, username=username, image_file=image_file)
+    return render_template('user_readings.html', title='Dashboard2', reading=reading, user=user, username=username, image_file=image_file, lreading=lreading)
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
