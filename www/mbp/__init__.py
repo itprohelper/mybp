@@ -3,8 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-
 from mbp.config import Config
+
+#app = Flask(__name__) #añadi esto para probar
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -15,11 +16,12 @@ mail = Mail()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    #with app.app_context(): 
-        #db.init_db()           
+    #from . import db #añadi esto
+    #with app.app_context(): # aqui
+     #   db.init_db()        # aqui   
     app.config.from_object(Config)
      
-    from . import db #añadi esto
+    
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
