@@ -17,7 +17,7 @@ def new_reading():
         db.session.add(reading)
         db.session.commit()
         flash('Your reading has been created!', 'success')
-        return redirect(url_for('main.home'))
+        return redirect(url_for('readings.reading', reading_id=reading.id))
     return render_template('new_reading.html', title='New Reading',
                             form=form, legend='New Reading')
 
