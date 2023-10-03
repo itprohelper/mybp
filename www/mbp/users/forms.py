@@ -64,7 +64,7 @@ class ResetPasswordForm(FlaskForm):
 
     submit = SubmitField('Reset Password')
 
-#-------------------Older forms. Maybe will use later-----------------#
+#-------------------Older forms. Maybe will use later for Doctor-----------------#
 #class NewDoctor(FlaskForm):
 #    doctor_name = StringField('Doctor Name', validators=[Length(min=0, max=15)]) #Need to validate opcional y que no haga un entry al DB if blank
 #    doctor_email = StringField('Doctor Email', validators=[Length(max=50)]) #Need to validate opcional y que no haga un entry al DB if blank
