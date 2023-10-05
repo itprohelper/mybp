@@ -6,6 +6,7 @@ from mbp import db
 from mbp.models import Reading
 from mbp.readings.forms import NewReadingForm
 
+
 readings = Blueprint('readings', __name__)
 
 @readings.route('/reading/new/', methods=['GET', 'POST'])
