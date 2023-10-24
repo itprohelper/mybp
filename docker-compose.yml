@@ -37,12 +37,13 @@ services:
       - '443:443'
     volumes:
       - ./nginx/mbp.conf:/etc/nginx/conf.d/mbp.conf:ro
+      - ./certbot/www:/var/www/certbot:ro #añadi esto
 
   certbot:
     image: certbot/certbot:latest
     volumes:
-      - ./certbot/www:/opt/www/:rw
-      - ./certbot/conf:/etc/letsencrypt/:rw
+      #- ./certbot/www:/opt/www/:rw
+      - ./certbot/www:/var/www/certbot/:rw
 
 
 volumes:
