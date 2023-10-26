@@ -21,7 +21,8 @@ MAIL_PASSWORD=<your_mail_server_password>
 ```
 
 ## To be done
-I need to modify the home page to display ONLY the readings for the current user logged in.
+I need help implementing a SSL cert using Docker compose in production. I tried using the docker image from certbot/certbot:latest, but 
+it is taking me too long to implement it. Yes, I'm using google to search for options. If anybody has done it please share some ideas if you like. I'm still learning. Thanks.
 
 ## More details are coming soon.
 I also wrote some brief tutorials on different subjects hoping to help somebody.
