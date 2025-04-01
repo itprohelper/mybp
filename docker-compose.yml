@@ -28,11 +28,28 @@ services:
       - '5000:5000'
       #- '80:80'
 
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certs:/etc/letsencrypt
+    command: 
+      - certonly
+      - -- webroot
+      - -w /etc/letsencrypt
+      - -d $DOMAIN
+      - --agree-tos
+      - --no-eff-email
+    depends_on:
+      - www
+    environment:
+      - DOMAIN=yakahu.com
+
   nginx:
     restart: always
     build: nginx/.
     depends_on:
       - www
+      - certbot
     ports:
       - '80:80'
       - '443:443'
@@ -40,11 +57,11 @@ services:
       - ./nginx/mbp.conf:/etc/nginx/conf.d/mbp.conf:ro
       - ./certbot/www:/var/www/certbot:ro #añadi esto
 
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
+#  certbot:
+#    image: certbot/certbot:latest
+#    volumes:
       #- ./certbot/www:/opt/www/:rw
-      - ./certbot/www:/var/www/certbot/:rw
+#      - ./certbot/www:/var/www/certbot/:rw
 
 
 volumes:
