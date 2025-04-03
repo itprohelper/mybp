@@ -1,0 +1,69 @@
+services:
+
+  db:
+    restart: always
+    build: db/.
+    environment:
+      MARIADB_ROOT_PASSWORD: supersecure
+    volumes: #averiguar las diferencias y ventajas comprado con el volume de abajo ./www:/opt/www
+      - database:/var/lib/mysql
+
+  www:
+    restart: always
+    build: www/.
+    depends_on:
+        db:
+          condition: service_started
+    volumes:
+      - ./www:/opt/www
+      #- ./www/mbp/templates:/opt/www/templates
+    env_file:
+      - ./www/.env
+    environment:
+      #have the app run in debug mode. Change to 0 to turn OFF. if you change to 0 you won't see 
+      #instant changes. You will need to restart docker compose down/up
+      FLASK_DEBUG: 1 
+      #SECRET_KEY:
+    ports:
+      - '5000:5000'
+      #- '80:80'
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certs:/etc/letsencrypt
+    command: 
+      - certonly
+      - -- webroot
+      - -w /etc/letsencrypt
+      - -d $DOMAIN
+      - --agree-tos
+      - --no-eff-email
+    depends_on:
+      - www
+    environment:
+      - DOMAIN=yakahu.com
+
+  nginx:
+    restart: always
+    build: nginx/.
+    depends_on:
+      - www
+      - certbot
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx/mbp.conf:/etc/nginx/conf.d/mbp.conf:ro
+      - ./certbot/www:/var/www/certbot:ro #añadi esto
+
+#  certbot:
+#    image: certbot/certbot:latest
+#    volumes:
+      #- ./certbot/www:/opt/www/:rw
+#      - ./certbot/www:/var/www/certbot/:rw
+
+
+volumes:
+  database:
+  #www:
