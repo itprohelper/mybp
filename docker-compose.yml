@@ -1,3 +1,6 @@
+# networks:
+#   mbp_default:
+#     driver: bridge
 services:
   www:
     build: www/.
@@ -14,8 +17,11 @@ services:
       - HTTPS_KEY=/etc/ssl/certs/localhost.key
       #- SQLALCHEMY_DATABASE_URI=sqlite:///www/instance/site.db
       - SQLALCHEMY_TRACK_MODIFICATIONS=false
-    depends_on:
-      - nginx
+    #depends_on:
+    #  - nginx
+    # networks:
+    #   - mbp_default
+      
   nginx:
     build: nginx/.   
     #image: nginx/.
@@ -26,6 +32,8 @@ services:
       #- ./nginx/mbp.conf:/etc/nginx/conf.d/default.conf
       #- ./nginx.conf:/etc/nginx/conf.d/default.conf
       - /Users/rgm/certs:/etc/ssl/certs
+    # networks:
+    #   - mbp_default
     #depends_on:
     #  - www
     #environment:
