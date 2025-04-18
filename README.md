@@ -20,10 +20,9 @@ MAIL_USERNAME=<your_email_for_sending>
 MAIL_PASSWORD=<your_mail_server_password>
 ```
 
-## To be done
-I need help implementing a SSL cert using Docker compose in production. I tried using the docker image from certbot/certbot:latest, but 
-it is taking me too long to implement it. Yes, I'm using google to search for options. If anybody has done it please share some ideas if you like. I'm still learning. Thanks.
+## Notes
+I implemented the SSL using Letsencrypt. It was tricky, but I did it. I tried to use the help of AI, but it wasn't really helpful. I eneded up looking for old notes and doing online searches.
 
 ## More details are coming soon.
-I also wrote some brief tutorials on different subjects hoping to help somebody.
+I also write some brief tutorials on different subjects hoping to help somebody.
 See them on my site [ITPro Helper](https://itprohelper.com)
