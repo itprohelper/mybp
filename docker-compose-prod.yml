@@ -1,0 +1,27 @@
+services:
+  www:
+    build: www/.
+    ports:
+      - "5000:5000" # HTTP port for testing
+    volumes:
+      - ./www/.env:/opt/www/.env
+    env_file:
+      - ./www/.env
+    environment:
+      - HTTPS_CERT=/etc/ssl/certs/localhost.crt
+      - HTTPS_KEY=/etc/ssl/certs/localhost.key
+      - SQLALCHEMY_TRACK_MODIFICATIONS=false
+    #depends_on:
+    #  - nginx
+    # networks:
+    #   - mbp_default
+      
+  nginx:
+    build: nginx/.   
+    #image: nginx/.
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt/live/yakahu.com-0001/fullchain.pem:/etc/nginx/ssl/fullchain.pem
+      - /etc/letsencrypt/live/yakahu.com-0001/privkey.pem:/etc/nginx/ssl/privkey.pem
