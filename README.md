@@ -24,6 +24,7 @@ MAIL_PASSWORD=<your_mail_server_password>
 2. Make username the email. Remove username field.
 3. Create calendar view for blood preassure readings.
 4. Allow users to email readings.
+5. Show last three readings at home page once the user is logged in.
 
 ## Notes
 I implemented the SSL using Letsencrypt. It was tricky, but I did it. I tried to use the help of AI, but it wasn't really helpful. I eneded up looking for old notes and doing online searches.
