@@ -19,6 +19,11 @@ MAIL_USE_TLS=True or False
 MAIL_USERNAME=<your_email_for_sending>
 MAIL_PASSWORD=<your_mail_server_password>
 ```
+## Things I need to fix/create
+1. Email registration/reset password is not working.
+2. Make username the email. Remove username field.
+3. Create calendar view for blood preassure readings.
+4. Allow users to email readings.
 
 ## Notes
 I implemented the SSL using Letsencrypt. It was tricky, but I did it. I tried to use the help of AI, but it wasn't really helpful. I eneded up looking for old notes and doing online searches.
