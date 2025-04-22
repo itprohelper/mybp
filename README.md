@@ -2,7 +2,7 @@
 This repo uses my [Flask base repo](https://github.com/itprohelper/flask_base) which intends to make easier to setup a development using Docker.
 
 ## How to run this container?
-Using your terminal go to the directory where you cloned this repo and then start the containers using [docker compose](https://docs.docker.com/compose/)
+Using your terminal go to the directory where you cloned this repo and then start the containers using [docker compose](https://docs.docker.com/compose/) I created this branch mainly for local testing. You need to get your Letsencrypt certs and create them locally.
 
 ```bash
 docker compose up
@@ -25,6 +25,7 @@ MAIL_PASSWORD=<your_mail_server_password>
 3. Create calendar view for blood preassure readings.
 4. Allow users to email readings.
 5. Show last three readings at home page once the user is logged in.
+6. Migrate to MySQL/Postgres. What do you recommend for a simple database?
 
 ## Notes
 I implemented the SSL using Letsencrypt. It was tricky, but I did it. I tried to use the help of AI, but it wasn't really helpful. I eneded up looking for old notes and doing online searches.
