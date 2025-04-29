@@ -1,6 +1,3 @@
-# networks:
-#   mbp_default:
-#     driver: bridge
 services:
   www:
     build: www/.
