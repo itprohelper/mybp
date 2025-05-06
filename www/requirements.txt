@@ -4,6 +4,7 @@ beautifulsoup4==4.12.3
 blinker==1.7.0
 charset-normalizer==3.4.0
 Flask==3.0.0
+flask-wtf
 Flask-RESTful==0.3.10
 Flask-SQLAlchemy==3.1.1
 flask-migrate
@@ -16,6 +17,7 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.3
 python-dotenv
+pillow
 requests==2.32.3
 selenium==4.25.0
 SQLAlchemy==2.0.40
