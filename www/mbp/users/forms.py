@@ -20,11 +20,13 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
 
-    def validate_username(self, username):
+    #def validate_username(self, username):
+    def validate_username(self, email):
 
-        user = User.query.filter_by(username=username.data).first()
+        #user = User.query.filter_by(username=username.data).first()
+        user = User.query.filter_by(email=email.data).first()
         if user: #Validates if user exist and show the below error
-            raise ValidationError('That username is taken. Please choose a different one')
+            raise ValidationError('That email is taken. Please use a different one')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()

@@ -39,7 +39,7 @@ def account():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
-        current_user.username = form.username.data
+        #current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
         flash('Your account has been updated!', 'success')
@@ -47,7 +47,8 @@ def account():
         return redirect(url_for('users.account'))
 
     elif request.method == 'GET': #if a GET populate user's current data in the form.
-        form.username.data = current_user.username
+        #form.username.data = current_user.username
+        form.username.data = current_user.email
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
@@ -83,7 +84,8 @@ def register():
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('users.user_readings', username=current_user.username)) #check if the current user is logged in and redirect to home page.
+        #return redirect(url_for('users.user_readings', username=current_user.username)) #check if the current user is logged in and redirect to home page.
+        return redirect(url_for('users.user_readings', username=current_user.email))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first() #query database for user entered in form.
@@ -91,8 +93,8 @@ def login():
             login_user(user, remember=form.remember.data) #login the user if it exist and password is correct also pass in the remember me checkbox.
             next_page = request.args.get('next') #para el target page por ejemplo si entras /account page sin estar login.
 
-            return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.username)) #send user back to home page if all good.
-            
+            #return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.username)) #send user back to home page if all good.
+            return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.email))
         else:
             flash('Login no good. Please check email and password', 'danger') #then user will be redirected to login page.
     return render_template('login.html', title='Login', form=form)
