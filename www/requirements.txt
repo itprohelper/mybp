@@ -3,6 +3,7 @@ attrs==24.2.0
 beautifulsoup4==4.12.3
 blinker==1.7.0
 charset-normalizer==3.4.0
+email-validator
 Flask==3.0.0
 flask-wtf
 Flask-RESTful==0.3.10
