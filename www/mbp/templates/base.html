@@ -33,6 +33,7 @@
         {% if current_user.is_authenticated %} <!-- Shows logout route if user already authenticated. -->
         <a class="nav-item nav-link" href="{{ url_for('readings.new_reading') }}">New Reading</a>
         <a class="nav-item nav-link" href="{{ url_for('users.user_readings', username=current_user.username) }}">Dashboard</a>
+        
         <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
         <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
         {% else %}
