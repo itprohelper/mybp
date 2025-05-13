@@ -1,4 +1,3 @@
-
 from flask import Blueprint
 from flask import (render_template, url_for, flash,
                   redirect, request, abort)
@@ -39,35 +38,36 @@ def account():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
-        #current_user.username = form.username.data
-        current_user.email = form.email.data
+        current_user.username = form.username.data
+        #current_user.email = form.email.data
         db.session.commit()
         flash('Your account has been updated!', 'success')
 
         return redirect(url_for('users.account'))
 
     elif request.method == 'GET': #if a GET populate user's current data in the form.
-        #form.username.data = current_user.username
-        form.username.data = current_user.email
+        form.username.data = current_user.username
+        #form.username.data = current_user.email
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 @users.route('/user/<string:username>')
+#@users.route('/user/<string:email>')
 @login_required
-#def user_readings(username):
-def user_readings(email):
+def user_readings(username):
+#def user_readings(email):
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     page = request.args.get('page', 1, type=int) #Grab the page we want. In this case page one. Set type integer as the page number.
     
-    #user = User.query.filter_by(username=username).first_or_404()
-    user = User.query.filter_by(email=email).first_or_404()
+    user = User.query.filter_by(username=username).first_or_404()
+    #user = User.query.filter_by(email=email).first_or_404()
     lreading = Reading.query.filter_by(user=user).order_by(Reading.id.desc()).first()
     reading = Reading.query.filter_by(user=user)\
         .order_by(Reading.date_posted.desc())\
         .paginate(page=page, per_page=5) #Show 5 readings per page. Can use http://localhost:8000/home?page=3 to navigate to pages.
-    #return render_template('user_readings.html', title='User Dashboard', reading=reading, user=user, username=username, image_file=image_file, lreading=lreading)
-    return render_template('user_readings.html', title='User Dashboard', reading=reading, user=user, image_file=image_file, lreading=lreading)
+    return render_template('user_readings.html', title='User Dashboard', reading=reading, user=user, username=username, image_file=image_file, lreading=lreading)
+    #return render_template('user_readings.html', title='User Dashboard', reading=reading, user=user, image_file=image_file, lreading=lreading)
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
@@ -76,8 +76,8 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(email=form.email.data, password=hashed_password)
-        #user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        #user = User(email=form.email.data, password=hashed_password)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user) #Add user to database
         db.session.commit() #Commit changes to database
         flash('Your account has been created!', 'success') #Display flash confirmation message.
@@ -87,8 +87,8 @@ def register():
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        #return redirect(url_for('users.user_readings', username=current_user.username)) #check if the current user is logged in and redirect to home page.
-        return redirect(url_for('users.user_readings', email=current_user.email))
+        return redirect(url_for('users.user_readings', username=current_user.username)) #check if the current user is logged in and redirect to home page.
+        #return redirect(url_for('users.user_readings', email=current_user.email))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first() #query database for user entered in form.
@@ -96,9 +96,9 @@ def login():
             login_user(user, remember=form.remember.data) #login the user if it exist and password is correct also pass in the remember me checkbox.
             next_page = request.args.get('next') #para el target page por ejemplo si entras /account page sin estar login.
 
-            #return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.username)) #send user back to home page if all good.
+            return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.username)) #send user back to home page if all good.
             #return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.email))
-            return redirect(next_page) if next_page else redirect(url_for('users.user_readings', email=current_user.email))
+            #return redirect(next_page) if next_page else redirect(url_for('users.user_readings', email=current_user.email))
         else:
             flash('Login no good. Please check email and password', 'danger') #then user will be redirected to login page.
     return render_template('login.html', title='Login', form=form)
