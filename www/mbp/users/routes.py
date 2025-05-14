@@ -76,7 +76,6 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        #user = User(email=form.email.data, password=hashed_password)
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user) #Add user to database
         db.session.commit() #Commit changes to database
@@ -88,7 +87,6 @@ def register():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('users.user_readings', username=current_user.username)) #check if the current user is logged in and redirect to home page.
-        #return redirect(url_for('users.user_readings', email=current_user.email))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first() #query database for user entered in form.
@@ -97,8 +95,7 @@ def login():
             next_page = request.args.get('next') #para el target page por ejemplo si entras /account page sin estar login.
 
             return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.username)) #send user back to home page if all good.
-            #return redirect(next_page) if next_page else redirect(url_for('users.user_readings', username=current_user.email))
-            #return redirect(next_page) if next_page else redirect(url_for('users.user_readings', email=current_user.email))
+            
         else:
             flash('Login no good. Please check email and password', 'danger') #then user will be redirected to login page.
     return render_template('login.html', title='Login', form=form)
