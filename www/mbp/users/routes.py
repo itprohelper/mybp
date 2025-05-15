@@ -79,8 +79,11 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user) #Add user to database
         db.session.commit() #Commit changes to database
+        print("User committed", user) #Debug only
         flash('Your account has been created!', 'success') #Display flash confirmation message.
         return redirect(url_for('users.login')) #When the form is a success redirect to login page.
+    else:
+        print(form.errors) #debugging line
     return render_template('register.html', title='Register', form=form)
 
 @users.route('/login', methods=['GET', 'POST'])
