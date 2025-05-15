@@ -7,7 +7,7 @@ from flask_login import current_user #to validate user and email updates in Upda
 from mbp.models import User #despues tengo que import Reading, Doctor y etc aqui
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    #username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     email = StringField('email', validators=[DataRequired(), Email()])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     submit = SubmitField('Submit')

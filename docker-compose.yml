@@ -6,9 +6,10 @@ services:
       #- "443:443" # HTTPS port for testing
     volumes:
       - /Users/rgm/certs:/etc/ssl/certs
-      - ./www/.env:/opt/www/.env
+      - ./www/mbp/.env:/opt/www/.env
+      - ./www/instance:/opt/www/instance
     env_file:
-      - ./www/.env
+      - ./www/mbp/.env
     environment:
       - HTTPS_CERT=/etc/ssl/certs/localhost.crt
       - HTTPS_KEY=/etc/ssl/certs/localhost.key
