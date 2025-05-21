@@ -109,7 +109,7 @@ def logout():
 
     return redirect(url_for('main.home'))
 
-@users.route('/reset_password', methods=['GET', 'POST'])
+@users.route('/reset-password', methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
@@ -121,7 +121,7 @@ def reset_request():
         return redirect(url_for('users.login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
-@users.route('/reset_password/<token>', methods=['GET', 'POST']) #pass in the token in the URL
+@users.route('/reset-password/<token>', methods=['GET', 'POST']) #pass in the token in the URL
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
