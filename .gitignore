@@ -1,6 +1,6 @@
 __pycache__/
 .DS_Store
-www/.env
+www/mbp/.env
 ideas
 www/venv
-venv/
+venv
