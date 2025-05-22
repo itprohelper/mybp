@@ -8,3 +8,4 @@ www/mbp/.env
 ideas
 www/venv/
 venv/
+www/instance/*
