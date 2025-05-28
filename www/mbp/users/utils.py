@@ -4,6 +4,7 @@ from PIL import Image #Pillow library to resize image in Account page.
 from flask import url_for, current_app
 from flask_mail import Message
 from mbp import mail
+from mailjet_rest import Client
 #from crypt import methods
 
 #import json
