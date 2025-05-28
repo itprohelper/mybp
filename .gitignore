@@ -1,10 +1,10 @@
+www/mbp/.env
 .env
 *.env
 __pycache__/
 *.pyc
 .vscode/
 .DS_Store
-www/mbp/.env
 ideas
 www/venv/
 venv/
