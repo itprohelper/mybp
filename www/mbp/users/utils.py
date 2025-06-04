@@ -4,8 +4,6 @@ from PIL import Image #Pillow library to resize image in Account page.
 from flask import url_for, current_app
 from flask_mail import Message
 from mbp import mail
-from mailjet_rest import Client
-#from crypt import methods
 
 #import json
 #from mbp.models import User, Reading
@@ -28,7 +26,7 @@ def save_picture(form_picture):
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Password Reset Request',
-                    sender='april@yakahu.com',
+                    sender=os.getenv('APPROVED_SENDER'),
                     recipients=[user.email])
     msg.body = f'''To reset your password, visit the following link:
 {url_for('users.reset_token', token=token, _external=True)}
