@@ -12,7 +12,7 @@ You will need to create a file .env under the www/ directory with the following 
 
 ```bash
 SECRET_KEY=<your_secret_key>
-SQLALCHEMY_DATABASE_URI=sqlite:///site.db (this is an example-poing your DB to the right location)
+SQLALCHEMY_DATABASE_URI=sqlite:///site.db (this is an example-point your DB to the right location)
 MAIL_SERVER=<your_SMTP_server>
 MAIL_PORT=<port_your_mail_server_uses>
 MAIL_USE_TLS=True or False
@@ -20,15 +20,12 @@ MAIL_USERNAME=<your_email_for_sending>
 MAIL_PASSWORD=<your_mail_server_password>
 ```
 ## Things I need to fix/create
-1. Email registration/reset password is not working.
-2. Make username the email. Remove username field.
-3. Create calendar view for blood preassure readings.
-4. Allow users to email readings.
-5. Show last three readings at home page once the user is logged in.
-6. Migrate to MySQL/Postgres. What do you recommend for a simple database?
+1. Create calendar view for blood preassure readings.
+2. Allow users to email readings.
+3. Migrate to MySQL/Postgres. What do you recommend for a simple database?
 
 ## Notes
-I implemented the SSL using Letsencrypt. It was tricky, but I did it. I tried to use the help of AI, but it wasn't really helpful. I eneded up looking for old notes and doing online searches.
+I implemented the SSL using Letsencrypt. I pointed the certs location in the docker-compose yml file. It was tricky, but I did it. I tried to use the help of AI, but it wasn't really helpful. I eneded up looking for old notes and doing online searches.
 
 ## More details are coming soon.
 I also write some brief tutorials on different subjects hoping to help somebody.

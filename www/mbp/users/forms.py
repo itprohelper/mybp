@@ -7,7 +7,6 @@ from flask_login import current_user #to validate user and email updates in Upda
 from mbp.models import User #despues tengo que import Reading, Doctor y etc aqui
 
 class LoginForm(FlaskForm):
-    #username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     email = StringField('email', validators=[DataRequired(), Email()])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     submit = SubmitField('Submit')
@@ -21,10 +20,7 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
-    #def validate_username(self, email):
-
         user = User.query.filter_by(username=username.data).first()
-        #user = User.query.filter_by(email=email.data).first()
         if user: #Validates if user exist and show the below error
             raise ValidationError('That email is taken. Please use a different one')
 

@@ -9,3 +9,4 @@ ideas
 www/venv/
 venv/
 www/instance/*
+www/instance/site.db
