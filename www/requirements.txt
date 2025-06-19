@@ -28,7 +28,7 @@ zipp==3.17.0
 =======
 email_validator
 flask-moment
-Werkzeug==2.2.2
+Werkzeug==3.0.6
 flask-bcrypt
 Pillow
 itsdangerous==2.0.1
