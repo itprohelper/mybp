@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ moment.include_moment() }}
+    {{ moment.include_moment() }}
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
@@ -31,6 +32,9 @@
       <div class="navbar-nav">
         {% if current_user.is_authenticated %} <!-- Shows logout route if user already authenticated. -->
         <a class="nav-item nav-link" href="{{ url_for('readings.new_reading') }}">New Reading</a>
+        <a class="nav-item nav-link" href="{{ url_for('users.user_readings', username=current_user.username) }}">Dashboard</a>
+        <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
+        <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
         <a class="nav-item nav-link" href="{{ url_for('users.user_readings', username=current_user.username) }}">Dashboard</a>
         
         <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
@@ -63,7 +67,13 @@
             <div class="content-section">
               <h3>Resources</h3>
               <p class='text-muted'>Use the below to learn more about high BP.
+              <h3>Resources</h3>
+              <p class='text-muted'>Use the below to learn more about high BP.
                 <ul class="list-group">
+                  <a li class="list-group-item list-group-item-light" href="https://www.heart.org/en/health-topics/high-blood-pressure" target="_blank">Heart.org</li></a>
+                  <a li class="list-group-item list-group-item-light" href="https://www.nhlbi.nih.gov/health/high-blood-pressure" target="_blank">NIH</li></a>
+                  <a li class="list-group-item list-group-item-light" href="https://medlineplus.gov/highbloodpressure.html" target="_blank">MedlinePlus</li></a>
+                  <a li class="list-group-item list-group-item-light" href="https://www.nhsinform.scot/illnesses-and-conditions/heart-and-blood-vessels/conditions/high-blood-pressure-hypertension" target="_blank">NHSinform</li></a>
                   <a li class="list-group-item list-group-item-light" href="https://www.heart.org/en/health-topics/high-blood-pressure" target="_blank">Heart.org</li></a>
                   <a li class="list-group-item list-group-item-light" href="https://www.nhlbi.nih.gov/health/high-blood-pressure" target="_blank">NIH</li></a>
                   <a li class="list-group-item list-group-item-light" href="https://medlineplus.gov/highbloodpressure.html" target="_blank">MedlinePlus</li></a>

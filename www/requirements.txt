@@ -11,6 +11,7 @@ Flask-SQLAlchemy==3.1.1
 flask-migrate
 flask_bcrypt
 flask-login
+<<<<<<< HEAD
 flask-mail
 flask-moment
 importlib-metadata==6.8.0
@@ -24,4 +25,14 @@ selenium==4.25.0
 SQLAlchemy==2.0.40
 Werkzeug==3.0.1
 zipp==3.17.0
+=======
+email_validator
+flask-moment
+Werkzeug==2.2.2
+flask-bcrypt
+Pillow
+itsdangerous==2.0.1
+flask-mail
+python-dotenv
+>>>>>>> f4f24b8318672830d6dcc9f68606a325abbc60be
 gunicorn==20.1.0

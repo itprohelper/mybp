@@ -9,7 +9,7 @@
           <text class="font-weight-bold">{{ reading.sys }} /</text>
           <text class="font-weight-bold">{{ reading.dia}}</text>
           <small class="text-muted">{{ moment().format('MMMM Do YYYY, h:mm:ss a') }}</small> 
-          
+          <!--<small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small>--> <!--Need to display local time to the user-->
           {% if reading.user == current_user %}
             <div>
               <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('readings.update_reading', reading_id=reading.id) }}">Update</a>

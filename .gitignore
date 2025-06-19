@@ -2,7 +2,10 @@ www/mbp/.env
 .env
 *.env
 __pycache__/
+<<<<<<< HEAD
 *.pyc
 .vscode/
+=======
+>>>>>>> f4f24b8318672830d6dcc9f68606a325abbc60be
 .DS_Store
 www/.env
