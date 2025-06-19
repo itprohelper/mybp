@@ -18,9 +18,9 @@
         <div class="article-metadata">
           <a class="mr-2" href="{{ url_for('users.user_readings', username=reading.user.username) }}">{{ reading.user.username }}</a> <!--need to define the logic here-->
           <small class="text-muted">{{ moment(reading.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}</small>
-          <!--<small class="text-muted">{{ reading.date_posted.strftime('%m-%d-%Y at %H:%M') }}</small>--> <!--Need to display local time to the user-->
+          
         </div>
-                <!--<h2><a class="article-content" href="{{ url_for('readings.reading', reading_id=reading.id) }}">Edit</a></h2>-->
+           
         <text class="font-weight-bold">{{ reading.sys }} /</text>
           <text class="font-weight-bold">{{ reading.dia}}</text>
           <p class="article-content">{{ reading.notes }}</p>

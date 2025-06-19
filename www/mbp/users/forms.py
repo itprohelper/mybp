@@ -8,7 +8,6 @@ from mbp.models import User #despues tengo que import Reading, Doctor y etc aqui
 
 class LoginForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), Email()])
-    #username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     submit = SubmitField('Submit')
     remember = BooleanField('Remember me')
@@ -21,10 +20,9 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
-
         user = User.query.filter_by(username=username.data).first()
         if user: #Validates if user exist and show the below error
-            raise ValidationError('That username is taken. Please choose a different one')
+            raise ValidationError('That email is taken. Please use a different one')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()

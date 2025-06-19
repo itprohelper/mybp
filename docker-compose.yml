@@ -8,7 +8,7 @@ services:
             #- /Users/rgm/certs:/etc/ssl/certs
       - ./www/.env:/opt/www/.env
     env_file:
-      - ./www/.env
+      - ./www/mbp/.env
     environment:
       - HTTPS_CERT=/etc/ssl/certs/localhost.crt
       - HTTPS_KEY=/etc/ssl/certs/localhost.key

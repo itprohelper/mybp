@@ -1,10 +1,15 @@
+import os
 from flask import Flask
+from dotenv import load_dotenv
+from mbp.config import Config
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-from mbp.config import Config
 from flask_moment import Moment
+
+load_dotenv()
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -18,6 +23,9 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     
     app.config.from_object(Config)
+    print("Using DB URI:", app.config["SQLALCHEMY_DATABASE_URI"])
+    print("DB file path:", os.path.abspath(os.path.join(app.instance_path, 'site.db')))
+    
     moment.init_app(app)    
     db.init_app(app)
     bcrypt.init_app(app)
