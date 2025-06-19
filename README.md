@@ -35,5 +35,6 @@ See them on my site [ITPro Helper](https://itprohelper.com)
 
 ## Special thanks for the great inspiration using Flask
 [Miguel Grinberg](blog.miguelgrinberg.com)
+
 [Corey Schafer](coreyms.com)
 
