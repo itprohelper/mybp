@@ -7,12 +7,9 @@ services:
     volumes:
             #- /Users/rgm/certs:/etc/ssl/certs
       - ./www/.env:/opt/www/.env
-    env_file:
-<<<<<<< HEAD
-      - ./www/mbp/.env
-=======
-      - ./www/.env
->>>>>>> f4f24b8318672830d6dcc9f68606a325abbc60be
+#    env_file:
+#      - ./www/mbp/.env
+#      - ./www/.env
     environment:
       - HTTPS_CERT=/etc/ssl/certs/localhost.crt
       - HTTPS_KEY=/etc/ssl/certs/localhost.key
