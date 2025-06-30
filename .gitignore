@@ -1,3 +1,4 @@
+www/.env
 www/mbp/.env
 .env
 *.env
@@ -5,8 +6,3 @@ __pycache__/
 *.pyc
 .vscode/
 .DS_Store
-ideas
-www/venv/
-venv/
-www/instance/*
-www/instance/site.db
